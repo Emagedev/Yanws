@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Emagedev_yanws>
+            <version>0.1</version>
+        </Emagedev_yanws>
+    </modules>
+    <frontend>
+        <layout>
+            <updates>
+                <emdevyanws>
+                    <file>emdevyanws.xml</file>
+                </emdevyanws>
+            </updates>
+        </layout>
+        <routers>
+            <emagedevyanws>
+                <use>standard</use>
+                <args>
+                    <module>Emagedev_yanws</module>
+                    <frontName>news</frontName>
+                </args>
+            </emagedevyanws>
+        </routers>
+    </frontend>
+    <global>
+        <models>
+            <emagedevyanws>
+                <resourceModel>emagedevyanws_resource</resourceModel>
+            </emagedevyanws>
+            <emagedevyanws_resource>
+                <entities>
+                    <news>
+                        <table>emagedevyanws_news</table>
+                    </news>
+                </entities>
+            </emagedevyanws_resource>
+        </models>
+        <resources>
+            <emagedevyanws_setup>
+                <setup>
+                    <module>Emagedev_yanws</module>
+                </setup>
+            </emagedevyanws_setup>
+        </resources>
+    </global>
+</config>

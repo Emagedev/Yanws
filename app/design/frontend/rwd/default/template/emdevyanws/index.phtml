@@ -1,0 +1,12 @@
+<h1>Новости</h1>
+<?php foreach(Mage::registry('news') as $article): ?>
+    <article class="news-entry">
+        <header>
+            <h2><?= $article['title']?></h2>
+            <em><?= $article['timestamp_created']?></em>
+        </header>
+        <section class="news-entry-content">
+            <?= $article['article']?>
+        </section>
+    </article>
+<?php endforeach; ?>
