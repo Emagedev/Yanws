@@ -1,20 +1,21 @@
 <?php
-    $newsId = Mage::app()->getRequest()->getParam('id', 0);
-    $article = Mage::getModel('yanws/news')->load($newsId);
+    $entry = $this->getEntry();
+    $links = $this->getLinks();
+    $utils = $this->getUtils();
+?>
 
-    if (!($article->getId() > 0)) {
-        $this->_forward('noRoute');
-    } ?>
-
-<article class="news-entry full">
-    <header>
-        <h2><?= $article['title']?></h2>
-        <em><?= Mage::helper('yanws/prettyDateTime')->parse(new DateTime($article['timestamp_created'])); ?></em>
-    </header>
-    <section class="news-entry-content">
-        <?= $article['article']; ?>
-    </section>
-    <footer>
-
-    </footer>
-</article>
+<section class="yanws-entry-view">
+    <article class="news-entry">
+        <header>
+            <h2><?= $entry->getTitle()?></h2>
+            <em><?= $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
+        </header>
+        <section class="news-entry-content">
+            <?= $entry->getArticle(); ?>
+        </section>
+        <footer>
+            <a href="<?php echo $utils->makeUrl($links["prev"]->getUrl()) ?>"><?php echo $links["prev"]->getTitle() ?></a>
+            <a href="<?php echo $utils->makeUrl($links["next"]->getUrl()) ?>"><?php echo $links["next"]->getTitle() ?></a>
+        </footer>
+    </article>
+</section>

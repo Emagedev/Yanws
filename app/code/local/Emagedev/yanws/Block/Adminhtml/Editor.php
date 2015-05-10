@@ -6,12 +6,13 @@
  * Time: 3:05
  */
 
-class Emagedev_Yanws_Block_Adminhtml_Editor extends Mage_Adminhtml_Block_Abstract {
-    public function _construct() {
+class Emagedev_Yanws_Block_Adminhtml_Editor extends Mage_Adminhtml_Block_Widget {
+    protected function _construct() {
+        parent::_construct();
         $helper = Mage::helper('yanws');
         $this->_blockGroup = 'yanws';
-        $this->_controller = 'adminhtml_news';
+        $this->_controller = 'adminhtml_editor';
 
-        $this->_headerText = $helper->__('News entry');
+
     }
 } 

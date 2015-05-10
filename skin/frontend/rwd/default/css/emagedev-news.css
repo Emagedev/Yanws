@@ -16,9 +16,22 @@
         padding: .7rem 1.4rem;
     }
 
-    .side-news article.news-entry{
+    .yanws.side-news article.news-entry{
         border-bottom: 1px solid #999;
         font-size: 18px;
+    }
+    .yanws.side-news article.news-entry header{
+        background: #eee;
+        padding: 1.4rem;
+    }
+
+    .yanws-entry-view{
+        font-size: 1.4em;
+    }
+
+    .yanws-entry-view article.news-entry section.news-entry-content {
+        font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+        padding: .7rem 1.4rem;
     }
 }
 
@@ -27,7 +40,6 @@
         font-size: 16px;
     }
 }
-
 
 article.news-entry header em{
     color: #999;

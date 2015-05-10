@@ -16,5 +16,4 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
         $this->_addContent($contentBlock);
         $this->renderLayout();
     }
-
 } 

@@ -7,21 +7,30 @@
  */
 
 class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract {
+
     public function _construct()
     {
         parent::_construct();
         $this->_init('yanws/news');
     }
 
-    public function dateBeautifier() {
-        return date('m/d/Y', $this['timestamp_created']);
+    public function _beforeSave() {
+        $url_transliterator = Mage::helper('catalog/product_url');
+        if(!$this->getUrl()) {
+            $this->setData("url", urlencode($url_transliterator->format($this->getTitle())));
+        }
+        // dispatch orig events after?
+        parent::_beforeSave();
     }
 
-    public function afterLoad()
+    public function isPublished() {
+        return $this->getIsPublished();
+    }
+
+    protected function _beforeToHtml()
     {
-        $this->getResource()->afterLoad($this);
-        $this->_afterLoad();
-        $this["pretty_date"] = Mage::helper('yanws/prettyDateTime')->parse(new DateTime($this['timestamp_created']));
+        $this->datetime = Mage::helper('yanws/prettyDateTime')->parse(new DateTime($this['timestamp_created']));
+        parent::_beforeToHtml();
         return $this;
     }
 } 

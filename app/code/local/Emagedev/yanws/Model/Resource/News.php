@@ -6,7 +6,7 @@
  * Time: 11:57
  */
 
-class Emagedev_Yanws_Model_Resource_News extends Mage_Core_Model_Mysql4_Abstract
+class Emagedev_Yanws_Model_Resource_News extends Mage_Core_Model_Resource_Db_Abstract
 {
 
     public function _construct()

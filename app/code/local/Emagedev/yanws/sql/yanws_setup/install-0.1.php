@@ -30,7 +30,18 @@ $table = $installer->getConnection()
         'nullable'  => false,
         'default' => ''
     ))
-    ->addColumn('published', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
+    ->addColumn('shorten_article', 'text', null, array(
+        'nullable'  => false,
+        'default' => ''
+    ))
+    ->addColumn('is_shorten', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
+        'nullable'  => false,
+        'default' => 0
+    ))
+    ->addColumn('url', Varien_Db_Ddl_Table::TYPE_VARCHAR, 64, array(
+        'nullable'  => false
+    ))
+    ->addColumn('is_published', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
         'nullable'  => false,
         'default' => 1
     ))
@@ -38,6 +49,13 @@ $table = $installer->getConnection()
         'nullable'  => false,
         'default' => ''
     ));
+
 $installer->getConnection()->createTable($table);
+
+$installer->getConnection()->addIndex(
+    $tableNews,
+    $installer->getIdxName($tableNews, array('url'), Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE),
+    array('url'),
+    Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE);
 
 $installer->endSetup();

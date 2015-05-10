@@ -32,7 +32,7 @@
                     <entry module="yanws">
                         <title>Add news entry</title>
                         <sort_order>0</sort_order>
-                        <action>yanws/adminhtml_yanws</action>
+                        <action>yanws/adminhtml_wysiwyg</action>
                     </entry>
                 </children>
          </yanws>
@@ -62,6 +62,15 @@
                 </args>
             </yanws>
         </routers>
+        <!--<translate>
+            <modules>
+                <Mage_Poll>
+                    <files>
+                        <default>Mage_Poll.csv</default>
+                    </files>
+                </Mage_Poll>
+            </modules>
+        </translate>-->
     </frontend>
     <global>
         <models>
@@ -79,6 +88,9 @@
             </yanws_resource>
         </models>
         <helpers>
+            <catalog>
+                <class>Mage_Catalog_Helper</class>
+            </catalog>
             <yanws>
                 <class>Emagedev_Yanws_Helper</class>
             </yanws>
