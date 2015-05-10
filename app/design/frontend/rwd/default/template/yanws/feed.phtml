@@ -1,0 +1,29 @@
+<?php
+    $news = Mage::getModel('yanws/news')->getCollection()->setOrder('timestamp_created', 'DESC');
+    $viewUrlRoot = Mage::getUrl('news/index');
+
+    // TODO: Empty list
+?>
+<h1>Новости</h1>
+<?php var_export(Mage::helper('catalog/product_url')->format("а так?")); ?>
+<section class="full-news">
+    <?php foreach($news as $article): ?>
+        <?php if($article->isPublished()): ?>
+            <article class="news-entry">
+                <header>
+                    <?php echo Mage::helper('core/url'); ?>
+                    <h2><a href="<?php echo $viewUrlRoot . '?id=' . $article->getId() ?>"><?= $article->getTitle(); ?></a></h2>
+                    <em><?php echo Mage::helper('yanws/prettyDateTime')->parse(new DateTime($article->getTimestampCreated())); ?></em>
+                </header>
+                <section class="news-entry-content">
+                    <?php echo Mage::helper('yanws/articleUtils')->truncateWords($article->getArticle(), 60); ?>
+                </section>
+                <footer>
+                    <!-- TODO: check for existing url -->
+                    <a href="<?php echo $viewUrlRoot . 'view/page/' . Mage::helper('catalog/product_url')->format($article->getTitle()); ?>">Read more</a>
+                </footer>
+            </article>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <?php echo $this->getPagerHtml(); ?>
+</section>

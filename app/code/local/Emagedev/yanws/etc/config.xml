@@ -1,47 +1,99 @@
 <?xml version="1.0" ?>
 <config>
     <modules>
-        <Emagedev_yanws>
+        <Emagedev_Yanws>
             <version>0.1</version>
-        </Emagedev_yanws>
+        </Emagedev_Yanws>
     </modules>
+    <admin>
+        <routers>
+            <yanws>
+                <use>admin</use>
+                <args>
+                    <module>Emagedev_Yanws</module>
+                    <frontName>yanws</frontName>
+                </args>
+            </yanws>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <yanws module="yanws">
+                <title>Yanws</title>
+                <sort_order>77</sort_order>
+                <children>
+                    <grid module="yanws">
+                        <title>Manage news</title>
+                        <sort_order>0</sort_order>
+                        <action>yanws/adminhtml_yanws</action>
+                    </grid>
+                </children>
+                <children>
+                    <entry module="yanws">
+                        <title>Add news entry</title>
+                        <sort_order>0</sort_order>
+                        <action>yanws/adminhtml_yanws</action>
+                    </entry>
+                </children>
+         </yanws>
+        </menu>
+        <layout>
+            <updates>
+                <enties>
+                    <file>entry.xml</file>
+                </enties>
+            </updates>
+        </layout>
+    </adminhtml>
     <frontend>
         <layout>
             <updates>
-                <emdevyanws>
-                    <file>emdevyanws.xml</file>
-                </emdevyanws>
+                <yanws>
+                    <file>yanws.xml</file>
+                </yanws>
             </updates>
         </layout>
         <routers>
-            <emagedevyanws>
+            <yanws>
                 <use>standard</use>
                 <args>
-                    <module>Emagedev_yanws</module>
+                    <module>Emagedev_Yanws</module>
                     <frontName>news</frontName>
                 </args>
-            </emagedevyanws>
+            </yanws>
         </routers>
     </frontend>
     <global>
         <models>
-            <emagedevyanws>
-                <resourceModel>emagedevyanws_resource</resourceModel>
-            </emagedevyanws>
-            <emagedevyanws_resource>
+            <yanws>
+                <class>Emagedev_Yanws_Model</class>
+                <resourceModel>yanws_resource</resourceModel>
+            </yanws>
+            <yanws_resource>
+                <class>Emagedev_Yanws_Model_Resource</class>
                 <entities>
                     <news>
-                        <table>emagedevyanws_news</table>
+                        <table>yanws_news</table>
                     </news>
                 </entities>
-            </emagedevyanws_resource>
+            </yanws_resource>
         </models>
+        <helpers>
+            <yanws>
+                <class>Emagedev_Yanws_Helper</class>
+            </yanws>
+        </helpers>
+        <blocks>
+            <yanws>
+                <class>Emagedev_Yanws_Block</class>
+            </yanws>
+        </blocks>
         <resources>
-            <emagedevyanws_setup>
+            <yanws_setup>
                 <setup>
-                    <module>Emagedev_yanws</module>
+                    <module>Emagedev_Yanws</module>
                 </setup>
-            </emagedevyanws_setup>
+            </yanws_setup>
         </resources>
     </global>
 </config>

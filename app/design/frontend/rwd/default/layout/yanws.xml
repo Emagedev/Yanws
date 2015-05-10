@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<layout>
+    <yanws_index_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/emagedev-news.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" template="yanws/index.phtml" />
+        </reference>
+    </yanws_index_index>
+    <yanws_view_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/emagedev-news.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" template="yanws/view.phtml" />
+        </reference>
+    </yanws_view_index>
+</layout>

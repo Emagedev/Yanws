@@ -1,0 +1,26 @@
+@media only screen and (min-width: 761px) {
+    article.news-entry{
+        font-size: 24px;
+    }
+    article.news-entry header{
+        background: #eee;
+        padding: 1.4rem;
+    }
+    article.news-entry section.news-entry-content{
+        font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+        padding: 1.4rem;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    article.news-entry{
+        font-size: 16px;
+    }
+}
+
+
+article.news-entry header em{
+    color: #999;
+}
+
+

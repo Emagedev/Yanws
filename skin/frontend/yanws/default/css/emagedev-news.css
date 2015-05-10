@@ -1,0 +1,38 @@
+@media only screen and (min-width: 761px) {
+    .full-news article.news-entry{
+        border-bottom: 1px solid #999;
+        font-size: 24px;
+    }
+    .full-news article.news-entry header{
+        background: #eee;
+        padding: 1.4rem;
+    }
+    .full-news article.news-entry section.news-entry-content{
+        font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+        padding: .7rem 1.4rem;
+    }
+    .full-news article.news-entry footer{
+        background: #eee;
+        padding: .7rem 1.4rem;
+    }
+
+    .side-news article.news-entry{
+        border-bottom: 1px solid #999;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    article.news-entry{
+        font-size: 16px;
+    }
+}
+
+
+article.news-entry header em{
+    color: #999;
+    font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+    font-size: .7em;
+    float: right;
+}
+

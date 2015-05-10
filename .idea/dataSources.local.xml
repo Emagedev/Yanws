@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - magneta@192.168.10.10" uuid="f1253bb2-7263-4dae-98e0-85acacca3f91">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>magneta</user-name>
+    </data-source>
+  </component>
+</project>
+
