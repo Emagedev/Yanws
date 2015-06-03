@@ -7,5 +7,44 @@
  */
 
 class Emagedev_Yanws_Helper_Data extends Mage_Core_Helper_Abstract {
+    public function checkExistenceByUrlIgnoringItselfId($entryUrl, $entryId, $published = false) {
+        $entry = $this->getEntryByUrl($entryUrl);
 
-} 
+        if(!$entry || $entry->getId() == $entryId) {
+            return false;
+        } else {
+            if(!$entry->isPublished() && $published) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public function checkExistenceByUrl($entryUrl, $published = false) {
+        $entry = $this->getEntryByUrl($entryUrl);
+
+        if(!$entry) {
+            return false;
+        } else {
+            if(!$entry->isPublished() && $published) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    private function getEntryByUrl($entryUrl) {
+        $entry = Mage::getModel('yanws/news')
+            ->load($entryUrl, 'url');
+
+        $entryData = $entry->getData();
+
+        if(empty($entryData)) {
+            return false;
+        } else {
+            return $entry;
+        }
+    }
+}

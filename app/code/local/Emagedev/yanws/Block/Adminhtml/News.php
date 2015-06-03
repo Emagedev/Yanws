@@ -15,7 +15,7 @@ class Emagedev_Yanws_Block_Adminhtml_News extends Mage_Adminhtml_Block_Widget_Gr
         $this->_blockGroup = 'yanws';
         $this->_controller = 'adminhtml_news';
 
-        $this->_headerText = $helper->__('News Management');
+        $this->_headerText = $helper->__('News management');
         $this->_addButtonLabel = $helper->__('New entry');
     }
 } 

@@ -47,7 +47,7 @@ $table = $installer->getConnection()
     ))
     ->addColumn('timestamp_created', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
         'nullable'  => false,
-        'default' => ''
+        'default' => 'CURRENT_TIMESTAMP'
     ));
 
 $installer->getConnection()->createTable($table);

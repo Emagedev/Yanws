@@ -3,7 +3,7 @@
     $feed = $this->getLast();
     $utils = $this->getUtils();
 ?>
-<h5><?php echo $title; ?></h5>
+<div class="block-title"><strong><span><?php echo $title; ?></span></strong></div>
 <section class="yanws side-news">
     <?php foreach($feed as $entry): ?>
         <article class="news-entry">
@@ -12,10 +12,9 @@
                 <h4><a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h4>
             </header>
             <section class="yanws news-entry-content">
-                <?php echo $utils->truncateWords($entry->getArticle(), 15); ?>
+                <?php echo $this->getShorten($entry); ?>
             </section>
             <footer>
-                <!-- TODO: check for existing url -->
                 <a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
             </footer>
         </article>

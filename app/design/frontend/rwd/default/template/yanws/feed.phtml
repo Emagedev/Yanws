@@ -1,27 +1,33 @@
 <?php
+    $title = $this->getTitle();
     $feed = $this->getFeed();
     $utils = $this->getUtils();
-
-    // TODO: Empty list
 ?>
-<h1>Новости</h1>
-<section class="full-news">
-    <?php foreach($feed as $entry): ?>
-        <?php if($entry->isPublished()): ?>
-            <article class="news-entry">
-                <header>
-                    <h2><a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h2>
-                    <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-                </header>
-                <section class="news-entry-content">
-                    <?php echo $utils->truncateWords($entry->getArticle(), 60); ?>
-                </section>
-                <footer>
-                    <!-- TODO: check for existing url -->
-                    <a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>">Read more</a>
-                </footer>
-            </article>
-        <?php endif; ?>
-    <?php endforeach; ?>
-    <?php echo $this->getPager(); ?>
-</section>
+<h1><?php echo $title; ?></h1>
+<?php if(!empty($feed)): ?>
+    <section class="full-news">
+        <?php foreach($feed as $entry): ?>
+            <?php if($entry->isPublished()): ?>
+                <article class="news-entry">
+                    <header>
+                        <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
+                        <h2><a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h2>
+                    </header>
+                    <section class="news-entry-content">
+                        <?php echo $this->getShorten($entry); ?>
+                    </section>
+                    <footer>
+                        <a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
+                    </footer>
+                </article>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php echo $this->getPager(); ?>
+    </section>
+<?php else: ?>
+    <section class="full-news">
+        <div class="yanws feed-empty">
+            <p>Sorry, there's no news to show</p>
+        </div>
+    </section>
+<?php endif; ?>

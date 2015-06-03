@@ -11,8 +11,32 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template {
     {
         parent::_prepareLayout();
 
-        $this->setLinks(Mage::registry('yanws_near_links'));
-        $this->setEntry(Mage::registry('yanws_entry'));
+        $entry = Mage::getModel('yanws/news')
+            ->load(Mage::app()->getRequest()->getParam("page"), 'url');
+
+        $collectionPublished = Mage::getModel('yanws/news')
+            ->getCollection();
+
+        $entryTimestamp = $entry->getTimestampCreated();
+
+        $prev = $collectionPublished
+            ->addFieldToFilter('is_published', array('eq' => 1))
+            ->addFieldToFilter('timestamp_created', array('lt' => $entryTimestamp))
+            ->getFirstItem();
+
+        $collectionPublished = Mage::getModel('yanws/news')
+            ->getCollection();
+
+        $next = $collectionPublished
+            ->addFieldToFilter('is_published', array('eq' => 1))
+            ->addFieldToFilter('timestamp_created', array('gt' => $entryTimestamp))
+            ->getFirstItem();
+
+        if ($entry->isPublished()) {
+            $this->setEntry($entry);
+            $this->setLinks(array('next' => $next, 'prev' => $prev));
+        }
+        
         $this->setUtils(Mage::helper('yanws/articleUtils'));
 
         return $this;

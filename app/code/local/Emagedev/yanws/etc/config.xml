@@ -16,34 +16,75 @@
             </yanws>
         </routers>
     </admin>
+    <default>
+        <yanws_section>
+            <widget_group>
+                <show>1</show>
+                <save_tags>0</save_tags>
+                <force_truncate>1</force_truncate>
+            </widget_group>
+            <feed_group>
+                <save_tags>1</save_tags>
+                <force_truncate>0</force_truncate>
+            </feed_group>
+        </yanws_section>
+    </default>
     <adminhtml>
         <menu>
             <yanws module="yanws">
                 <title>Yanws</title>
                 <sort_order>77</sort_order>
                 <children>
-                    <grid module="yanws">
+                    <grid module="yanws" translate="title">
                         <title>Manage news</title>
                         <sort_order>0</sort_order>
                         <action>yanws/adminhtml_yanws</action>
                     </grid>
                 </children>
                 <children>
-                    <entry module="yanws">
+                    <entry module="yanws" translate="title">
                         <title>Add news entry</title>
                         <sort_order>0</sort_order>
-                        <action>yanws/adminhtml_wysiwyg</action>
+                        <action>yanws/adminhtml_yanws/new</action>
                     </entry>
                 </children>
          </yanws>
         </menu>
         <layout>
             <updates>
-                <enties>
-                    <file>entry.xml</file>
-                </enties>
+                <yanws>
+                    <file>yanws.xml</file>
+                </yanws>
             </updates>
         </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <yanws_section>
+                                            <title>Yanws Section</title>
+                                        </yanws_section>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Mage_Poll>
+                    <files>
+                        <default>Emagedev_Yanws_Adminhtml.csv</default>
+                    </files>
+                </Mage_Poll>
+            </modules>
+        </translate>
     </adminhtml>
     <frontend>
         <layout>
@@ -62,15 +103,15 @@
                 </args>
             </yanws>
         </routers>
-        <!--<translate>
+        <translate>
             <modules>
                 <Mage_Poll>
                     <files>
-                        <default>Mage_Poll.csv</default>
+                        <default>Emagedev_Yanws.csv</default>
                     </files>
                 </Mage_Poll>
             </modules>
-        </translate>-->
+        </translate>
     </frontend>
     <global>
         <models>
@@ -107,5 +148,15 @@
                 </setup>
             </yanws_setup>
         </resources>
+        <events>
+            <cms_wysiwyg_config_prepare>
+                <observers>
+                    <variable_observer>
+                        <class>core/variable_observer</class>
+                        <method>prepareWysiwygPluginConfig</method>
+                    </variable_observer>
+                </observers>
+            </cms_wysiwyg_config_prepare>
+        </events>
     </global>
 </config>

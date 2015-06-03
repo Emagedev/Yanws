@@ -7,14 +7,9 @@
             </action>
         </reference>
         <reference name="right">
-            <block type="yanws/news_widget" name="yanws.last" before="cart_sidebar" template="yanws/right.phtml" />
+            <block type="yanws/news_widget" name="yanws.last" before="cart_sidebar" template="yanws/widget.phtml" />
         </reference>
     </default>
-    <!--<cms_index_index>
-        <reference name="root">
-            <block type="core/template"  name="yanws.vblock" before="content" template="yanws/right.phtml" after="breadcrumbs" />
-        </reference>
-    </cms_index_index>-->
     <yanws_index_index>
         <reference name="head">
             <action method="addCss">

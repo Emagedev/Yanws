@@ -41,10 +41,26 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
         ));
         $this->addColumn('shorten_article', array(
             'header' => $helper->__('Shorten'),
-            'index' => 'article',
+            'index' => 'shorten_article',
             'type' => 'text',
             'sortable'  => true,
             'editable'  => true
+        ));
+        $this->addColumn('is_shorten', array(
+            'header' => $helper->__('Use shorten s'),
+            'index' => 'is_shorten',
+            'type' => 'text',
+            //'checked' => ,
+            'sortable'  => true,
+            'editable'  => false
+        ));
+        $this->addColumn('is_published', array(
+            'header' => $helper->__('Is published s'),
+            'index' => 'is_published',
+            'type' => 'text',
+            'onclick'   => 'this.value = this.checked ? 1 : 0;',
+            'sortable'  => true,
+            'editable'  => false
         ));
         $this->addColumn('url', array(
             'header' => $helper->__('URL'),
@@ -74,5 +90,12 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
             'url' => $this->getUrl('*/*/massDelete'),
         ));
         return $this;
+    }
+
+    public function getRowUrl($model)
+    {
+        return $this->getUrl('*/*/edit', array(
+            'id' => $model->getId(),
+        ));
     }
 } 
