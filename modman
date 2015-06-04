@@ -1,0 +1,6 @@
+app/code/local/Emagedev/Yanws app/code/local/Emagedev/Yanws
+app/design/adminhtml/default/default/layout/yanws.xml app/design/adminhtml/default/default/layout/yanws.xml
+app/design/frontend/rwd/default/layout/yanws.xml app/design/frontend/rwd/default/layout/yanws.xml
+app/design/frontend/rwd/default/template/yanws app/design/frontend/rwd/default/template/yanws
+app/etc/modules/Emagedev_yanws.xml app/etc/modules/Emagedev_yanws.xml
+skin/frontend/yanws/default/css/emagedev-news.css skin/frontend/yanws/default/css/emagedev-news.css
