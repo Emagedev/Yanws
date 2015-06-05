@@ -89,15 +89,17 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
      */
     private static function prettyFormat($difference, $unit)
     {
+        $helper = Mage::helper('yanws');
         // $prepend is added to the start of the string if the supplied
         // difference is greater than 0, and $append if less than
-        $prepend = ($difference < 0) ? 'In ' : '';
-        $append = ($difference > 0) ? ' ago' : '';
+        $prepend = ($difference < 0) ? $helper->__('In ') : '';
+        $append = ($difference > 0) ? $helper->__(' ago') : '';
         $difference = floor(abs($difference));
         // If difference is plural, add an 's' to $unit
         if ($difference > 1) {
             $unit = $unit . 's';
         }
+        $unit = $helper->__($unit);
         return sprintf('%s%d %s%s', $prepend, $difference, $unit, $append);
     }
     /**
@@ -113,6 +115,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
      */
     public static function prettyDate(\DateTime $dateTime, \DateTime $reference = null)
     {
+        $helper = Mage::helper('yanws');
         // If not provided, set $reference to the current DateTime
         if (!$reference) {
             $reference = new \DateTime(NULL, new \DateTimeZone($dateTime->getTimezone()->getName()));
@@ -129,9 +132,9 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         // Today
         if ($reference->format('Y/m/d') == $date) {
             if (0 <= $difference && $absDiff < self::MINUTE) {
-                return 'Moments ago';
+                return $helper->__('Moments ago');
             } elseif ($difference < 0 && $absDiff < self::MINUTE) {
-                return 'Seconds from now';
+                return $helper->__('Seconds from now');
             } elseif ($absDiff < self::HOUR) {
                 return self::prettyFormat($difference / self::MINUTE, 'minute');
             } else {
@@ -143,9 +146,9 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         $tomorrow = clone $reference;
         $tomorrow->modify('+ 1 day');
         if ($yesterday->format('Y/m/d') == $date) {
-            return 'Yesterday';
+            return $helper->__('Yesterday');
         } else if ($tomorrow->format('Y/m/d') == $date) {
-            return 'Tomorrow';
+            return $helper->__('Tomorrow');
         } else if ($absDiff / self::DAY <= 7) {
             return self::prettyFormat($difference / self::DAY, 'day');
         } else if ($absDiff / self::WEEK <= 5) {

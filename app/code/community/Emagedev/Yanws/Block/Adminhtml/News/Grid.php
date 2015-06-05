@@ -10,6 +10,9 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('yanws/news')->getCollection();
+
+
+
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -22,8 +25,9 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('id', array(
             'header' => $helper->__('ID'),
             'index' => 'id',
+            'type' => 'number',
             'sortable'  => true,
-            'editable'  => true
+            'editable'  => false
         ));
         $this->addColumn('title', array(
             'header' => $helper->__('Title'),
@@ -37,30 +41,34 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
             'index' => 'article',
             'type' => 'text',
             'sortable'  => true,
+            'renderer'  => 'Emagedev_Yanws_Block_Adminhtml_News_Renderer_Article',
             'editable'  => true
+        ));
+        $this->addColumn('is_shorten', array(
+            'header' => $helper->__('Use shorten s'),
+            'index' => 'is_shorten',
+            'type' => 'radio',
+            'renderer'  => 'Emagedev_Yanws_Block_Adminhtml_News_Renderer_Checkbox',
+            'sortable'  => true,
+            'editable'  => false,
+            'value'    => array('1')
         ));
         $this->addColumn('shorten_article', array(
             'header' => $helper->__('Shorten'),
             'index' => 'shorten_article',
             'type' => 'text',
             'sortable'  => true,
+            'renderer'  => 'Emagedev_Yanws_Block_Adminhtml_News_Renderer_Article',
             'editable'  => true
-        ));
-        $this->addColumn('is_shorten', array(
-            'header' => $helper->__('Use shorten s'),
-            'index' => 'is_shorten',
-            'type' => 'text',
-            //'checked' => ,
-            'sortable'  => true,
-            'editable'  => false
         ));
         $this->addColumn('is_published', array(
             'header' => $helper->__('Is published s'),
             'index' => 'is_published',
-            'type' => 'text',
-            'onclick'   => 'this.value = this.checked ? 1 : 0;',
+            'type' => 'radio',
+            'renderer'  => 'Emagedev_Yanws_Block_Adminhtml_News_Renderer_Checkbox',
             'sortable'  => true,
-            'editable'  => false
+            'editable'  => false,
+            'value'    => array('1')
         ));
         $this->addColumn('url', array(
             'header' => $helper->__('URL'),

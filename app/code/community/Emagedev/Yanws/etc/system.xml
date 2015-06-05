@@ -39,6 +39,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><show>1</show></depends>
                         </save_tags>
                         <force_truncate translate="label comment">
                             <label>Force truncate articles</label>
@@ -49,6 +50,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                             <comment>Force truncate news entries, even if there's a manually written shorten version.</comment>
+                            <depends><show>1</show></depends>
                         </force_truncate>
                         <!-- TODO: maybe add a MAX_WORDS field -->
                     </fields>
