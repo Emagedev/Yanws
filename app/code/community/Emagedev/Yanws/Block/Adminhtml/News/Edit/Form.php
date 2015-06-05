@@ -36,7 +36,6 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'files_browser_window_height'=> (int) Mage::getConfig()->getNode('adminhtml/cms/browser/window_height')
         ));
 
-
         $fieldset->addField('title', 'text', array(
             'label' => $helper->__('Title'),
             'required' => true,
@@ -73,8 +72,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'label' => $helper->__('Is published'),
             'required' => false,
             'name' => 'is_published',
-            'value' => empty($entry) ? true : $model->isPublished(),
-            'checked' => empty($entry) ? true : $model->isPublished(),
+            'value' => empty($entry) ? '1' : $model->isPublished(),
             'onclick'   => 'this.value = this.checked ? 1 : 0;'
         ));
         $fieldset->addField('timestamp_created', 'datetime', array(
@@ -84,6 +82,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'readonly' => true
         ));
 
+        $form->getElement('is_published')->setIsChecked(empty($entry) ? true : $model->isPublished());
         $form->setUseContainer(true);
 
         if($data = Mage::getSingleton('adminhtml/session')->getFormData()){

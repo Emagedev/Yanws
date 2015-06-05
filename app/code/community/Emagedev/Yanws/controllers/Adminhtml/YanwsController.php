@@ -36,8 +36,13 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
     {
         if ($data = $this->getRequest()->getPost()) {
             try {
+
+                $data['is_shorten'] = empty($data['is_shorten']) ? 0 : $data['is_shorten'];
+                $data['is_published'] = empty($data['is_published']) ? 1 : $data['is_published'];
+
                 $model = Mage::getModel('yanws/news');
                 $model->setData($data)->setId($this->getRequest()->getParam('id'));
+
                 $model->save();
 
                 Mage::getSingleton('adminhtml/session')->addSuccess($this->__('News was saved successfully'));
@@ -68,5 +73,27 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
             }
         }
         $this->_redirect('*/*/');
+    }
+
+    public function massDeleteAction() {
+        $ids = $this->getRequest()->getParam('Yanws');
+        if(!is_array($ids)) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select entries'));
+        } else {
+            try {
+                foreach ($ids as $id) {
+                    $news = Mage::getModel('yanws/news')->load($id);
+                    $news->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__(
+                        'Total of %d entries were successfully deleted', count($ids)
+                    )
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
     }
 } 

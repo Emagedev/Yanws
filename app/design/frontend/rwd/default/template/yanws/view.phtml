@@ -16,10 +16,10 @@
         <footer>
             <div class="news-footer-links">
                 <?php if(!empty($links['prev'])): ?>
-                    <a class="prev" href="<?php echo $utils->makeUrl($links['prev']->getUrl()) ?>"><?php echo $links['prev']->getTitle() ?></a>
+                    <a class="prev" href="<?php echo $utils->makeViewUrl($links['prev']->getUrl()) ?>"><?php echo $links['prev']->getTitle() ?></a>
                 <?php endif; ?>
                 <?php if(!empty($links['next'])): ?>
-                    <a class="next" href="<?php echo $utils->makeUrl($links['next']->getUrl()) ?>"><?php echo $links['next']->getTitle() ?></a>
+                    <a class="next" href="<?php echo $utils->makeViewUrl($links['next']->getUrl()) ?>"><?php echo $links['next']->getTitle() ?></a>
                 <?php endif; ?>
             </div>
         </footer>

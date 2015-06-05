@@ -18,11 +18,13 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         $this->viewUrlRoot = Mage::getUrl('news');
     }
 
-    public function makeUrl($link) {
+    public function makeViewUrl($link) {
+        $link = urlencode($link);
         return Mage::getUrl('news/index') . self::VIEW_ROUTE . self::URL_VIEW_PARAMETER . $link;
     }
 
     public function getUrl($link) {
+
         return $this->viewUrlRoot . self::BASE_ROUTE . $link;
     }
 

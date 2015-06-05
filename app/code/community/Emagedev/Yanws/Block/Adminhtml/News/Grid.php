@@ -83,7 +83,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('id');
-        $this->getMassactionBlock()->setFormFieldName('news');
+        $this->getMassactionBlock()->setFormFieldName('Yanws');
 
         $this->getMassactionBlock()->addItem('delete', array(
             'label' => $this->__('Delete'),

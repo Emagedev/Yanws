@@ -14,6 +14,8 @@ $tableNews = $installer->getTable('yanws/news');
 $installer->startSetup();
 
 $installer->getConnection()->dropTable($tableNews);
+
+// TODO: default values in model
 $table = $installer->getConnection()
     ->newTable($tableNews)
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
@@ -47,7 +49,7 @@ $table = $installer->getConnection()
     ))
     ->addColumn('timestamp_created', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
         'nullable'  => false,
-        'default' => 'CURRENT_TIMESTAMP'
+        'default' => 'CURRENT_TIMESTAMP()'
     ));
 
 $installer->getConnection()->createTable($table);

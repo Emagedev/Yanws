@@ -11,13 +11,13 @@
                 <article class="news-entry">
                     <header>
                         <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-                        <h2><a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h2>
+                        <h2><a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h2>
                     </header>
                     <section class="news-entry-content">
                         <?php echo $this->getShorten($entry); ?>
                     </section>
                     <footer>
-                        <a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
+                        <a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
                     </footer>
                 </article>
             <?php endif; ?>

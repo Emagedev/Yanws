@@ -9,13 +9,13 @@
         <article class="news-entry">
             <header>
                 <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-                <h4><a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h4>
+                <h4><a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h4>
             </header>
             <section class="yanws news-entry-content">
                 <?php echo $this->getShorten($entry); ?>
             </section>
             <footer>
-                <a href="<?php echo $utils->makeUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
+                <a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
             </footer>
         </article>
     <?php endforeach; ?>
