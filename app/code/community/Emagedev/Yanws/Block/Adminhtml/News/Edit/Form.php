@@ -44,16 +44,10 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
         $fieldset->addField('article', 'editor', array(
             'label' => $helper->__('Article'),
             'wysiwyg'   => true,
+            'style'     => 'width:700px; height:400px;',
             'config'    => $wysiwygConfig,
             'required' => true,
             'name' => 'article',
-        ));
-        $fieldset->addField('shorten_article', 'editor', array(
-            'label' => $helper->__('Shorten article'),
-            'required' => false,
-            'wysiwyg'   => true,
-            'config'    => $wysiwygConfig,
-            'name' => 'shorten_article',
         ));
         $fieldset->addField('is_shorten', 'checkbox', array(
             'label' => $helper->__('Use shorten'),
@@ -63,9 +57,18 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'checked' => empty($entry) ? false : $model->getIsShorten(),
             'onclick'   => 'this.value = this.checked ? 1 : 0;'
         ));
+        $fieldset->addField('shorten_article', 'editor', array(
+            'label' => $helper->__('Shorten article'),
+            'required' => false,
+            'style'     => 'width:98%; height:600px;',
+            'wysiwyg'   => true,
+            'config'    => $wysiwygConfig,
+            'name' => 'shorten_article',
+        ));
         $fieldset->addField('url', 'text', array(
             'label' => $helper->__('URL'),
             'required' => false,
+            'after_element_html' => '<div id="url-view-helper"><p>Пример ссылки: </p><span id="url-view-helper-url"></span></div>',
             'name' => 'url',
         ));
         $fieldset->addField('is_published', 'checkbox', array(
@@ -75,12 +78,12 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'value' => empty($entry) ? '1' : $model->isPublished(),
             'onclick'   => 'this.value = this.checked ? 1 : 0;'
         ));
-        $fieldset->addField('timestamp_created', 'datetime', array(
+        /*$fieldset->addField('timestamp_created', 'datetime', array(
             'label' => $helper->__('Created'),
             'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
             'name' => 'created',
             'readonly' => true
-        ));
+        ));*/
 
         $form->getElement('is_published')->setIsChecked(empty($entry) ? true : $model->isPublished());
         $form->setUseContainer(true);

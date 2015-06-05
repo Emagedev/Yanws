@@ -78,11 +78,11 @@
         </acl>
         <translate>
             <modules>
-                <Mage_Poll>
+                <yanws>
                     <files>
                         <default>Emagedev_Yanws_Adminhtml.csv</default>
                     </files>
-                </Mage_Poll>
+                </yanws>
             </modules>
         </translate>
     </adminhtml>

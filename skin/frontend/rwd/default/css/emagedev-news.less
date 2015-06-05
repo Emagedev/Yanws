@@ -1,3 +1,5 @@
+@accent: #39c;
+
 @media only screen and (min-width: 761px) {
   .full-news article.news-entry{
     border-bottom: 1px solid #ccc;
@@ -69,8 +71,8 @@
 
         &:hover{
 
-          background: #39c;
-          border-color: #28b;
+          background: @accent;
+          border-color: darken(@accent, 20%);
           color: #fff;
         }
       }
@@ -98,7 +100,7 @@
             display: inline-block;
 
             &:hover{
-              background: #39c;
+              background: @accent;
               color: #fff;
             }
 

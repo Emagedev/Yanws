@@ -54,8 +54,8 @@
     padding: .6rem;
   }
   .yanws.side-news footer.yanws.news-link a:hover {
-    background: #39c;
-    border-color: #28b;
+    background: #3399cc;
+    border-color: #1f5c7a;
     color: #fff;
   }
   .yanws-entry-view {
@@ -75,7 +75,7 @@
     display: inline-block;
   }
   .yanws-entry-view article.news-entry footer .news-footer-links a:hover {
-    background: #39c;
+    background: #3399cc;
     color: #fff;
   }
   .yanws-entry-view article.news-entry footer .news-footer-links a.prev {
