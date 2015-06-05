@@ -9,6 +9,7 @@
   }
   .full-news article.news-entry section.news-entry-content {
     padding: .7rem 1.4rem;
+    overflow: hidden;
   }
   .full-news article.news-entry footer {
     background: #eee;
@@ -35,6 +36,7 @@
   }
   .yanws.side-news article.news-entry section.news-entry-content {
     padding: .4rem .6rem;
+    overflow: hidden;
   }
   .yanws.side-news article.news-entry footer {
     padding: 0 .6rem .4rem .6rem;
@@ -103,6 +105,7 @@ article.news-entry header em {
 }
 article.news-entry section.news-entry-content {
   font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+  overflow: hidden;
 }
 article.news-entry section.news-entry-content img {
   margin: 1rem;

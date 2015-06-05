@@ -34,7 +34,6 @@ class Emagedev_Yanws_Block_News_Feed extends Mage_Core_Block_Template {
 
         $pager = $this->getLayout()->createBlock('page/html_pager', 'custom.pager');
         $pager->setAvailableLimit(array(5=>5, 10=>10));
-        $pager->setLimit(10);
         $pager->setCollection($feed);
 
         $title = Mage::getStoreConfig('yanws_section/titles_group/feed_title');
