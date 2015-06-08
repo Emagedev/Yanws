@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: skm293504
  * Date: 14.05.15
  * Time: 0:57
  */
-
 class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
 
@@ -32,8 +32,8 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'add_widgets' => false,
             'add_images' => true,
             'files_browser_window_url' => Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'),
-            'files_browser_window_width' => (int) Mage::getConfig()->getNode('adminhtml/cms/browser/window_width'),
-            'files_browser_window_height'=> (int) Mage::getConfig()->getNode('adminhtml/cms/browser/window_height')
+            'files_browser_window_width' => (int)Mage::getConfig()->getNode('adminhtml/cms/browser/window_width'),
+            'files_browser_window_height' => (int)Mage::getConfig()->getNode('adminhtml/cms/browser/window_height')
         ));
 
         $fieldset->addField('title', 'text', array(
@@ -43,9 +43,9 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
         ));
         $fieldset->addField('article', 'editor', array(
             'label' => $helper->__('Article'),
-            'wysiwyg'   => true,
-            'style'     => 'width:700px; height:400px;',
-            'config'    => $wysiwygConfig,
+            'wysiwyg' => true,
+            'style' => 'width:700px; height:400px;',
+            'config' => $wysiwygConfig,
             'required' => true,
             'name' => 'article',
         ));
@@ -55,14 +55,14 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'name' => 'is_shorten',
             'value' => empty($entry) ? false : $model->getIsShorten(),
             'checked' => empty($entry) ? false : $model->getIsShorten(),
-            'onclick'   => 'this.value = this.checked ? 1 : 0;'
+            'onclick' => 'this.value = this.checked ? 1 : 0;'
         ));
         $fieldset->addField('shorten_article', 'editor', array(
             'label' => $helper->__('Shorten article'),
             'required' => false,
-            'style'     => 'width:98%; height:600px;',
-            'wysiwyg'   => true,
-            'config'    => $wysiwygConfig,
+            'style' => 'width:98%; height:600px;',
+            'wysiwyg' => true,
+            'config' => $wysiwygConfig,
             'name' => 'shorten_article',
         ));
         $fieldset->addField('url', 'text', array(
@@ -76,19 +76,13 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'required' => false,
             'name' => 'is_published',
             'value' => empty($entry) ? '1' : $model->isPublished(),
-            'onclick'   => 'this.value = this.checked ? 1 : 0;'
+            'onclick' => 'this.value = this.checked ? 1 : 0;'
         ));
-        /*$fieldset->addField('timestamp_created', 'datetime', array(
-            'label' => $helper->__('Created'),
-            'format' => Mage::app()->getLocale()->getDateTimeFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
-            'name' => 'created',
-            'readonly' => true
-        ));*/
 
         $form->getElement('is_published')->setIsChecked(empty($entry) ? true : $model->isPublished());
         $form->setUseContainer(true);
 
-        if($data = Mage::getSingleton('adminhtml/session')->getFormData()){
+        if ($data = Mage::getSingleton('adminhtml/session')->getFormData()) {
             $form->setValues($data);
         } else {
             $form->setValues($model->getData());
@@ -96,14 +90,5 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
 
         return parent::_prepareForm();
     }
-
-    /*protected function _prepareLayout()
-    {
-        $return = parent::_prepareLayout();
-        if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
-            $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
-        }
-        return $return;
-    }*/
 
 }

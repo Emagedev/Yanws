@@ -1,18 +1,21 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: skm293504
  * Date: 15.05.15
  * Time: 18:17
  */
-
-class Emagedev_Yanws_Helper_ArticleUtils_DOMLettersIterator extends Mage_Core_Helper_Abstract {
-    public function iterator(DOMNode $el) {
+class Emagedev_Yanws_Helper_ArticleUtils_DOMLettersIterator extends Mage_Core_Helper_Abstract
+{
+    public function iterator(DOMNode $el)
+    {
         return new DOMLettersIterator($el);
     }
 }
 
-final class DOMLettersIterator implements Iterator {
+final class DOMLettersIterator implements Iterator
+{
     private $start, $current;
     private $offset, $key, $letters;
 
@@ -58,28 +61,29 @@ final class DOMLettersIterator implements Iterator {
     {
         if (!$this->current) return;
 
-        if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE)
-        {
-            if ($this->offset == -1)
-            {
+        if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
+            if ($this->offset == -1) {
                 // fastest way to get individual Unicode chars and does not require mb_* functions
-                preg_match_all('/./us',$this->current->textContent,$m); $this->letters = $m[0];
+                preg_match_all('/./us', $this->current->textContent, $m);
+                $this->letters = $m[0];
             }
-            $this->offset++; $this->key++;
+            $this->offset++;
+            $this->key++;
             if ($this->offset < count($this->letters)) return;
             $this->offset = -1;
         }
 
-        while($this->current->nodeType == XML_ELEMENT_NODE && $this->current->firstChild)
-        {
+        while ($this->current->nodeType == XML_ELEMENT_NODE && $this->current->firstChild) {
             $this->current = $this->current->firstChild;
             if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) return $this->next();
         }
 
-        while(!$this->current->nextSibling && $this->current->parentNode)
-        {
+        while (!$this->current->nextSibling && $this->current->parentNode) {
             $this->current = $this->current->parentNode;
-            if ($this->current === $this->start) {$this->current = NULL; return;}
+            if ($this->current === $this->start) {
+                $this->current = NULL;
+                return;
+            }
         }
 
         $this->current = $this->current->nextSibling;
@@ -100,7 +104,8 @@ final class DOMLettersIterator implements Iterator {
 
     function rewind()
     {
-        $this->offset = -1; $this->letters = array();
+        $this->offset = -1;
+        $this->letters = array();
         $this->current = $this->start;
         $this->next();
     }

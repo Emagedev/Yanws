@@ -42,11 +42,11 @@
                     </grid>
                 </children>
                 <children>
-                    <entry module="yanws" translate="title">
+                    <edit module="yanws" translate="title">
                         <title>Add news entry</title>
                         <sort_order>0</sort_order>
                         <action>yanws/adminhtml_yanws/new</action>
-                    </entry>
+                    </edit>
                 </children>
          </yanws>
         </menu>
@@ -61,6 +61,19 @@
             <resources>
                 <admin>
                     <children>
+                        <yanws translate="title" module="cms">
+                            <title>Yanws</title>
+                            <sort_order>70</sort_order>
+                            <children>
+                                <grid translate="title">
+                                    <title>Manage news</title>
+                                    <sort_order>0</sort_order>
+                                </grid>
+                                <edit>
+                                    <title>Edit news</title>
+                                </edit>
+                            </children>
+                        </yanws>
                         <system>
                             <children>
                                 <config>
@@ -129,9 +142,6 @@
             </yanws_resource>
         </models>
         <helpers>
-            <catalog>
-                <class>Mage_Catalog_Helper</class>
-            </catalog>
             <yanws>
                 <class>Emagedev_Yanws_Helper</class>
             </yanws>

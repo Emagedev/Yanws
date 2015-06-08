@@ -19,36 +19,36 @@ $installer->getConnection()->dropTable($tableNews);
 $table = $installer->getConnection()
     ->newTable($tableNews)
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
-        'identity'  => true,
+        'identity' => true,
         'unsigned' => true,
-        'nullable'  => false,
-        'primary'   => true
+        'nullable' => false,
+        'primary' => true
     ))
     ->addColumn('title', Varien_Db_Ddl_Table::TYPE_VARCHAR, '128', array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => ''
     ))
     ->addColumn('article', 'text', null, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => ''
     ))
     ->addColumn('shorten_article', 'text', null, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => ''
     ))
     ->addColumn('is_shorten', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => 0
     ))
     ->addColumn('url', Varien_Db_Ddl_Table::TYPE_VARCHAR, 64, array(
-        'nullable'  => false
+        'nullable' => false
     ))
     ->addColumn('is_published', Varien_Db_Ddl_Table::TYPE_BOOLEAN, null, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => 1
     ))
     ->addColumn('timestamp_created', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
-        'nullable'  => false,
+        'nullable' => false,
         'default' => 'CURRENT_TIMESTAMP()'
     ));
 

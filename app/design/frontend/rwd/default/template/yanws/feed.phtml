@@ -10,14 +10,18 @@
             <?php if($entry->isPublished()): ?>
                 <article class="news-entry">
                     <header>
-                        <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-                        <h2><a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h2>
+                        <em><?php echo $utils->prettyDate($entry->getDatetimeCreated()); ?></em>
+                        <h2><a href="<?php echo $this->escapeHtml(
+                                $utils->makeViewUrl($entry->getUrl())
+                            ); ?>"><?= $entry->getTitle(); ?></a></h2>
                     </header>
                     <section class="news-entry-content">
                         <?php echo $this->getShorten($entry); ?>
                     </section>
                     <footer>
-                        <a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
+                        <a href="<?php echo $this->escapeHtml(
+                            $utils->makeViewUrl($entry->getUrl())
+                        ); ?>"><?php echo $this->__('Read more'); ?></a>
                     </footer>
                 </article>
             <?php endif; ?>
@@ -27,6 +31,7 @@
 <?php else: ?>
     <section class="full-news">
         <div class="yanws feed-empty">
+            <!-- TODO: translate! -->
             <p>Sorry, there's no news to show</p>
         </div>
     </section>

@@ -1,18 +1,21 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: skm293504
  * Date: 15.05.15
  * Time: 18:17
  */
-
-class Emagedev_Yanws_Helper_ArticleUtils_DOMWordsIterator extends Mage_Core_Helper_Abstract {
-    public function iterator(DOMNode $el) {
+class Emagedev_Yanws_Helper_ArticleUtils_DOMWordsIterator extends Mage_Core_Helper_Abstract
+{
+    public function iterator(DOMNode $el)
+    {
         return new DOMWordsIterator($el);
     }
 }
 
-final class DOMWordsIterator implements Iterator {
+final class DOMWordsIterator implements Iterator
+{
     private $start, $current;
     private $offset, $key, $words;
 
@@ -58,11 +61,9 @@ final class DOMWordsIterator implements Iterator {
     {
         if (!$this->current) return;
 
-        if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE)
-        {
-            if ($this->offset == -1)
-            {
-                $this->words = preg_split("/[\n\r\t ]+/", $this->current->textContent, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_OFFSET_CAPTURE);
+        if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
+            if ($this->offset == -1) {
+                $this->words = preg_split("/[\n\r\t ]+/", $this->current->textContent, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
             }
             $this->offset++;
 
@@ -73,16 +74,17 @@ final class DOMWordsIterator implements Iterator {
             $this->offset = -1;
         }
 
-        while($this->current->nodeType == XML_ELEMENT_NODE && $this->current->firstChild)
-        {
+        while ($this->current->nodeType == XML_ELEMENT_NODE && $this->current->firstChild) {
             $this->current = $this->current->firstChild;
             if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) return $this->next();
         }
 
-        while(!$this->current->nextSibling && $this->current->parentNode)
-        {
+        while (!$this->current->nextSibling && $this->current->parentNode) {
             $this->current = $this->current->parentNode;
-            if ($this->current === $this->start) {$this->current = NULL; return;}
+            if ($this->current === $this->start) {
+                $this->current = NULL;
+                return;
+            }
         }
 
         $this->current = $this->current->nextSibling;
@@ -103,7 +105,8 @@ final class DOMWordsIterator implements Iterator {
 
     function rewind()
     {
-        $this->offset = -1; $this->words = array();
+        $this->offset = -1;
+        $this->words = array();
         $this->current = $this->start;
         $this->next();
     }

@@ -8,18 +8,22 @@
     <?php foreach($feed as $entry): ?>
         <article class="news-entry">
             <header>
-                <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-                <h4><a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?= $entry->getTitle(); ?></a></h4>
+                <em><?php echo $this->escapeHtml($utils->prettyDate($entry->getDatetimeCreated())); ?></em>
+                <h4>
+                    <a href="<?php echo $this->escapeHtml($utils->makeViewUrl($entry->getUrl())); ?>">
+                        <?php echo $entry->getTitle(); ?></a>
+                </h4>
             </header>
             <section class="yanws news-entry-content">
                 <?php echo $this->getShorten($entry); ?>
             </section>
             <footer>
-                <a href="<?php echo $utils->makeViewUrl($entry->getUrl()); ?>"><?php echo $this->__('Read more'); ?></a>
+                <a href="<?php echo $this->escapeHtml($utils->makeViewUrl($entry->getUrl())); ?>">
+                    <?php echo $this->__('Read more'); ?></a>
             </footer>
         </article>
     <?php endforeach; ?>
     <footer class="yanws news-link">
-        <a href="<?php echo $utils->getUrl(); ?>" ><?php echo $this->__('More news'); ?></a>
+        <a href="<?php echo $this->escapeHtml($utils->getUrl()); ?>" ><?php echo $this->__('More news'); ?></a>
     </footer>
 </section>

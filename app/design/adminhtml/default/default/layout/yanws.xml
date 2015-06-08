@@ -1,18 +1,16 @@
 <layout>
-    <default>
-        <reference name="head">
-            <action method="setCanLoadExtJs"><flag>1</flag></action>
-            <action method="addJs"><script>mage/adminhtml/variables.js</script></action>
-            <action method="addJs"><script>mage/adminhtml/wysiwyg/widget.js</script></action>
-            <action method="addJs"><script>lib/flex.js</script></action>
-            <action method="addJs"><script>lib/FABridge.js</script></action>
-            <action method="addJs"><script>mage/adminhtml/flexuploader.js</script></action>
-            <action method="addJs"><script>mage/adminhtml/browser.js</script></action>
-            <action method="addJs"><script>prototype/window.js</script></action>
-            <action method="addJs"><script>yanws/adminhtml/edit.js</script></action>
-            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
-            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
-            <action method="addCss"><stylesheet>lib/prototype/windows/themes/magento.css</stylesheet></action>
+    <yanws_adminhtml_yanws_index>
+        <reference name="content">
+            <block type="yanws/adminhtml_news_grid" />
         </reference>
-    </default>
+    </yanws_adminhtml_yanws_index>
+    <yanws_adminhtml_yanws_edit>
+        <reference name="head">
+            <update handle="editor"/>
+            <action method="addJs"><script>yanws/adminhtml/edit.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="yanws/adminhtml_news_edit" />
+        </reference>
+    </yanws_adminhtml_yanws_edit>
 </layout>

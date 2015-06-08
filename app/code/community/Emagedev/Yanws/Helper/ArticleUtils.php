@@ -1,55 +1,57 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: skm293504
  * Date: 08.05.15
  * Time: 15:16
  */
+class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
+{
+    const BASE_ROUTE = 'news';
+    const BASE_CONTROLLER = 'index';
+    const VIEW_ROUTE = 'view';
+    const URL_VIEW_PARAMETER = 'page';
 
+    public function makeViewUrl($link)
+    {
+        /*
+         * WTF it's not url encoder look at code!
+         * $link = $this->urlEncode($link);
+         */
 
-class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
-    private $viewUrlRoot = '';
-    const BASE_ROUTE = 'news/';
-    const BASE_CONTROLLER = 'index/';
-    const VIEW_ROUTE = 'view/';
-    const URL_VIEW_PARAMETER = 'page/';
-
-    protected function _construct() {
-        $this->viewUrlRoot = Mage::getUrl('news');
-    }
-
-    public function makeViewUrl($link) {
         $link = urlencode($link);
-        return Mage::getUrl('news/index') . self::VIEW_ROUTE . self::URL_VIEW_PARAMETER . $link;
+        return Mage::getUrl(self::BASE_ROUTE . DS . self::BASE_CONTROLLER . DS . self::VIEW_ROUTE, array(self::URL_VIEW_PARAMETER => $link));
     }
 
-    public function getUrl($link) {
-
-        return $this->viewUrlRoot . self::BASE_ROUTE . $link;
+    public function getUrl()
+    {
+        return Mage::getUrl(self::BASE_ROUTE . DS . self::BASE_CONTROLLER);
     }
 
-    public function getShorten($entry, $words, $saveTags = true, $forceTruncate = false, $letters = 500) {
+    public function getShorten($entry, $words, $saveTags = true, $forceTruncate = false, $letters = 500)
+    {
         $hasShorten = $entry->hasShortenForm();
 
-        if($hasShorten) {
+        if ($hasShorten) {
             $shorten = $entry->getShortenArticle();
         } else {
             $shorten = $entry->getArticle();
         }
 
-        if(!$saveTags) {
-            strip_tags($shorten, '<br><br/>');
+        if (!$saveTags) {
+            $this->stripTags($shorten, '<br><br/>', true);
         }
 
-        if($hasShorten) {
-            if($forceTruncate) {
+        if ($hasShorten) {
+            if ($forceTruncate) {
                 $shorten = $this->truncateWords($shorten, $words);
                 $shorten = $this->truncateChars($shorten, $letters);
             }
         } else {
             $shorten = $this->truncateWords($shorten, $words);
 
-            if($forceTruncate) {
+            if ($forceTruncate) {
                 $shorten = $this->truncateChars($shorten, $letters);
             }
         }
@@ -59,8 +61,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
 
     public function plainTextShorter($text, $charsLimit)
     {
-        if (strlen($text) > $charsLimit)
-        {
+        if (strlen($text) > $charsLimit) {
             $pos = strpos($text, ' ', 200);
             $new = substr($text, 0, $pos);
             return $new . '...';
@@ -71,11 +72,12 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
 
     // The constants correspond to units of time in seconds
     const MINUTE = 60;
-    const HOUR   = 3600;
-    const DAY    = 86400;
-    const WEEK   = 604800;
-    const MONTH  = 2628000;
-    const YEAR   = 31536000;
+    const HOUR = 3600;
+    const DAY = 86400;
+    const WEEK = 604800;
+    const MONTH = 2628000;
+    const YEAR = 31536000;
+
     /**
      * A helper used by parse() to create the human readable strings. Given a
      * positive difference, corresponding to a date in the past, it appends the
@@ -84,9 +86,10 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
      * if necessary.
      *
      * @param  integer $difference The difference between dates in any unit
-     * @param  string  $unit       The unit of time
+     * @param  string $unit The unit of time
      * @return string  The date in human readable format
      */
+
     private static function prettyFormat($difference, $unit)
     {
         $helper = Mage::helper('yanws');
@@ -102,6 +105,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         $unit = $helper->__($unit);
         return sprintf('%s%d %s%s', $prepend, $difference, $unit, $append);
     }
+
     /**
      * Returns a pretty, or human readable string corresponding to the supplied
      * $dateTime. If an optional secondary DateTime object is provided, it is
@@ -109,7 +113,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
      *
      * Examples: 'Moments ago', 'Yesterday', 'In 2 years'
      *
-     * @param  DateTime $dateTime  The DateTime to parse
+     * @param  DateTime $dateTime The DateTime to parse
      * @param  DateTime $reference (Optional) Defaults to the DateTime('now')
      * @return string   The date in human readable format
      */
@@ -167,9 +171,10 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
      *
      */
 
-    public static function truncateChars($html, $limit, $ellipsis = '...') {
+    public static function truncateChars($html, $limit, $ellipsis = '...')
+    {
 
-        if($limit <= 0 || $limit >= strlen(strip_tags($html)))
+        if ($limit <= 0 || $limit >= strlen(strip_tags($html)))
             return $html;
 
         $dom = new DOMDocument();
@@ -180,8 +185,8 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         $_it = Mage::helper('yanws/articleUtils_DOMLettersIterator');
         $it = $_it->iterator($body);
 
-        foreach($it as $letter) {
-            if($it->key() >= $limit) {
+        foreach ($it as $letter) {
+            if ($it->key() >= $limit) {
                 $currentText = $it->currentTextPosition();
                 $currentText[0]->nodeValue = substr($currentText[0]->nodeValue, 0, $currentText[1] + 1);
                 self::removeProceedingNodes($currentText[0], $body);
@@ -193,9 +198,10 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         return preg_replace('~<(?:!DOCTYPE|/?(?:html|head|body))[^>]*>\s*~i', '', $dom->saveHTML());
     }
 
-    public static function truncateWords($html, $limit, $ellipsis = '...') {
+    public static function truncateWords($html, $limit, $ellipsis = '...')
+    {
 
-        if($limit <= 0 || $limit >= self::countWords(strip_tags($html)))
+        if ($limit <= 0 || $limit >= self::countWords(strip_tags($html)))
             return $html;
 
         $dom = new DOMDocument();
@@ -208,8 +214,8 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         $_it = Mage::helper('yanws/articleUtils_DOMWordsIterator', $body);
         $it = $_it->iterator($body);
 
-        foreach($it as $word) {
-            if($it->key() >= $limit) {
+        foreach ($it as $word) {
+            if ($it->key() >= $limit) {
                 $currentWordPosition = $it->currentWordPosition();
                 $curNode = $currentWordPosition[0];
                 $offset = $currentWordPosition[1];
@@ -226,17 +232,18 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         return preg_replace('~<(?:!DOCTYPE|/?(?:html|head|body))[^>]*>\s*~i', '', $dom->saveHTML());
     }
 
-    private static function removeProceedingNodes(DOMNode $domNode, DOMNode $topNode) {
+    private static function removeProceedingNodes(DOMNode $domNode, DOMNode $topNode)
+    {
         $nextNode = $domNode->nextSibling;
 
-        if($nextNode !== NULL) {
+        if ($nextNode !== NULL) {
             self::removeProceedingNodes($nextNode, $topNode);
             $domNode->parentNode->removeChild($nextNode);
         } else {
             //scan upwards till we find a sibling
             $curNode = $domNode->parentNode;
-            while($curNode !== $topNode) {
-                if($curNode->nextSibling !== NULL) {
+            while ($curNode !== $topNode) {
+                if ($curNode->nextSibling !== NULL) {
                     $curNode = $curNode->nextSibling;
                     self::removeProceedingNodes($curNode, $topNode);
                     $curNode->parentNode->removeChild($curNode);
@@ -247,14 +254,15 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         }
     }
 
-    private static function insertEllipsis(DOMNode $domNode, $ellipsis) {
+    private static function insertEllipsis(DOMNode $domNode, $ellipsis)
+    {
         $avoid = array('a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5'); //html tags to avoid appending the ellipsis to
 
-        if( in_array($domNode->parentNode->nodeName, $avoid) && $domNode->parentNode->parentNode !== NULL) {
+        if (in_array($domNode->parentNode->nodeName, $avoid) && $domNode->parentNode->parentNode !== NULL) {
             // Append as text node to parent instead
             $textNode = new DOMText($ellipsis);
 
-            if($domNode->parentNode->parentNode->nextSibling)
+            if ($domNode->parentNode->parentNode->nextSibling)
                 $domNode->parentNode->parentNode->insertBefore($textNode, $domNode->parentNode->parentNode->nextSibling);
             else
                 $domNode->parentNode->parentNode->appendChild($textNode);
@@ -264,7 +272,8 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract {
         }
     }
 
-    private static function countWords($text) {
+    private static function countWords($text)
+    {
         $words = preg_split("/[\n\r\t ]+/", $text, -1, PREG_SPLIT_NO_EMPTY);
         return count($words);
     }

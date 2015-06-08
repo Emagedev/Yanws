@@ -28,7 +28,7 @@
             var urlInput = document.getElementsByName("url")[0];
             var titleInput = document.getElementsByName("title")[0];
             var exampleOutput = document.getElementById("url-view-helper-url");
-            var baseURL = location.protocol + "//" + location.hostname + "/index.php/news/view/page/";
+            var baseURL = location.protocol + "//" + location.hostname + "/index.php/news/index/view/page/";
 
             titleInput.onkeyup = urlInput.onkeyup = function() {
                 showExample();
