@@ -4,13 +4,26 @@
             <block type="yanws/adminhtml_news_grid" />
         </reference>
     </yanws_adminhtml_yanws_index>
+    <yanws_adminhtml_yanws_new>
+        <reference name="head">
+            <update handle="editor"/>
+            <action method="addJs"><script>yanws/adminhtml/edit.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="yanws/adminhtml_news_edit">
+                <block type="yanws/adminhtml_news_edit_form" as="form" name="emagedev_yanws_block_adminhtml_news_edit_form"/>
+            </block>
+        </reference>
+    </yanws_adminhtml_yanws_new>
     <yanws_adminhtml_yanws_edit>
         <reference name="head">
             <update handle="editor"/>
             <action method="addJs"><script>yanws/adminhtml/edit.js</script></action>
         </reference>
         <reference name="content">
-            <block type="yanws/adminhtml_news_edit" />
+            <block type="yanws/adminhtml_news_edit">
+                <block type="yanws/adminhtml_news_edit_form" as="child_form" name="emagedev_yanws_block_adminhtml_news_edit_form"/>
+            </block>
         </reference>
     </yanws_adminhtml_yanws_edit>
 </layout>

@@ -78,7 +78,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Grid extends Mage_Adminhtml_Block_Widg
             'url' => $this->getUrl('*/*/massDelete'),
 
             // TODO: Use own helper
-            'confirm'  => Mage::helper('adminnotification')->__('Are you sure?')
+            'confirm' => Mage::helper('adminnotification')->__('Are you sure?')
         ));
         return $this;
     }

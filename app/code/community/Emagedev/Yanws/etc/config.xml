@@ -48,7 +48,7 @@
                         <action>yanws/adminhtml_yanws/new</action>
                     </edit>
                 </children>
-         </yanws>
+            </yanws>
         </menu>
         <layout>
             <updates>

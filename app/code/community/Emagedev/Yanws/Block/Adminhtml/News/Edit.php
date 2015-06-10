@@ -8,6 +8,14 @@
  */
 class Emagedev_Yanws_Block_Adminhtml_News_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
+    public function _construct()
+    {
+        parent::_construct();
+
+        $this->_blockGroup = 'yanws';
+        $this->_controller = 'adminhtml_news';
+    }
+
     public function getHeaderText()
     {
         $model = Mage::registry('current_news');
