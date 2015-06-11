@@ -6,18 +6,11 @@
  * Date: 15.05.15
  * Time: 18:17
  */
-class Emagedev_Yanws_Helper_ArticleUtils_DOMLettersIterator extends Mage_Core_Helper_Abstract
-{
-    public function iterator(DOMNode $el)
-    {
-        return new DOMLettersIterator($el);
-    }
-}
 
-final class DOMLettersIterator implements Iterator
+final class DOMWordsIterator implements Iterator
 {
     private $start, $current;
-    private $offset, $key, $letters;
+    private $offset, $key, $words;
 
     /**
      * expects DOMElement or DOMDocument (see DOMDocument::load and DOMDocument::loadHTML)
@@ -36,9 +29,9 @@ final class DOMLettersIterator implements Iterator
      *
      * @return array
      */
-    function currentTextPosition()
+    function currentWordPosition()
     {
-        return array($this->current, $this->offset);
+        return array($this->current, $this->offset, $this->words);
     }
 
     /**
@@ -63,13 +56,14 @@ final class DOMLettersIterator implements Iterator
 
         if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
             if ($this->offset == -1) {
-                // fastest way to get individual Unicode chars and does not require mb_* functions
-                preg_match_all('/./us', $this->current->textContent, $m);
-                $this->letters = $m[0];
+                $this->words = preg_split("/[\n\r\t ]+/", $this->current->textContent, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
             }
             $this->offset++;
-            $this->key++;
-            if ($this->offset < count($this->letters)) return;
+
+            if ($this->offset < count($this->words)) {
+                $this->key++;
+                return;
+            }
             $this->offset = -1;
         }
 
@@ -93,7 +87,7 @@ final class DOMLettersIterator implements Iterator
 
     function current()
     {
-        if ($this->current) return $this->letters[$this->offset];
+        if ($this->current) return $this->words[$this->offset][0];
         return NULL;
     }
 
@@ -105,7 +99,7 @@ final class DOMLettersIterator implements Iterator
     function rewind()
     {
         $this->offset = -1;
-        $this->letters = array();
+        $this->words = array();
         $this->current = $this->start;
         $this->next();
     }

@@ -182,8 +182,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         $body = $dom->getElementsByTagName('body')->item(0);
 
-        $_it = Mage::helper('yanws/articleUtils_DOMLettersIterator');
-        $it = $_it->iterator($body);
+        $it = Mage::getModel('yanws/articleUtils_DOMLettersIterator', $body);
 
         foreach ($it as $letter) {
             if ($it->key() >= $limit) {
@@ -211,8 +210,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         $body = $dom->getElementsByTagName('body')->item(0);
 
-        $_it = Mage::helper('yanws/articleUtils_DOMWordsIterator', $body);
-        $it = $_it->iterator($body);
+        $it = Mage::getModel('yanws/articleUtils_DOMWordsIterator', $body);
 
         foreach ($it as $word) {
             if ($it->key() >= $limit) {

@@ -68,7 +68,19 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
         $fieldset->addField('url', 'text', array(
             'label' => $helper->__('URL'),
             'required' => false,
-            'after_element_html' => '<div id="url-view-helper"><p>Пример ссылки: </p><span id="url-view-helper-url"></span></div>',
+            'after_element_html' => '
+                <div id="url-view-helper">
+                    <p>Пример ссылки: </p>
+                    <span id="url-view-helper-url"></span>
+                </div>
+                <script id="yanws-json-data" type="application/json">
+                    {
+                        "url": {
+                            "base": ' . Mage::getBaseUrl() . '
+                        }
+                    }
+                </script>
+                ',
             'name' => 'url',
         ));
         $fieldset->addField('is_published', 'checkbox', array(

@@ -57,4 +57,8 @@ class Emagedev_Yanws_Helper_Data extends Mage_Core_Helper_Abstract
             return $entry;
         }
     }
+
+    public function _getTransliterator() {
+        return Mage::helper('catalog/product_url');
+    }
 }

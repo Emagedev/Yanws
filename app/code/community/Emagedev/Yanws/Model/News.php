@@ -52,7 +52,7 @@ class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract
     {
         // TODO: refactor
 
-        $url_transliterator = Mage::helper('catalog/product_url');
+        $url_transliterator = Mage::helper('yanws')->_getTransliterator();
 
         if ($this->getUrl() === '') {
             $url = $url_transliterator->format($this->getTitle());
