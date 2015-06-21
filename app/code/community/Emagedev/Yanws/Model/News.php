@@ -55,13 +55,20 @@ class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract
         $url_transliterator = Mage::helper('yanws')->_getTransliterator();
 
         if ($this->getUrl() === '') {
-            $url = $url_transliterator->format($this->getTitle());
+            $plainUrl = $url_transliterator->format($this->getTitle());
         } else {
-            $url = $this->getUrl();
+            $plainUrl = $this->getUrl();
         }
 
+        // To handle rewrites
+        if($plainUrl == 'index') {
+            $plainUrl = 'indexation';
+        }
+
+        $url = $plainUrl;
+
         for ($i = 0; $helper->checkExistenceByUrlIgnoringItselfId($url, $this->getId()); $i++) {
-            $url .= $i;
+            $url = $plainUrl . $i;
         }
 
         $this->setUrl($url);

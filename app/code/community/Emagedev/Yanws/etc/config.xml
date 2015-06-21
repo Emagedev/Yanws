@@ -168,5 +168,12 @@
                 </observers>
             </cms_wysiwyg_config_prepare>
         </events>
+        <rewrite>
+            <article_article_archives>
+                <from><![CDATA[#^/news/(?!(|index(\/?))$)#]]></from>
+                <to><![CDATA[/yanws/index/view/page/]]></to>
+                <complete>1</complete>
+            </article_article_archives>
+        </rewrite>
     </global>
 </config>

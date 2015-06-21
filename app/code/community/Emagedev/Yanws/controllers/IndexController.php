@@ -24,7 +24,7 @@ class Emagedev_Yanws_IndexController extends Mage_Core_Controller_Front_Action
 
         $entry = $helper->checkExistenceByUrl($page, true);
 
-        if ($entry !== false) {
+        if ($entry != false) {
             Mage::register('yanws_entry', $entry);
             $this->_title($this->__("News"))->_title($entry->getTitle());
             $this->loadLayout();

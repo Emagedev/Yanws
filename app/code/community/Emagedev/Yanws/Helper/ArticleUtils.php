@@ -21,7 +21,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
          */
 
         $link = urlencode($link);
-        return Mage::getUrl(self::BASE_ROUTE . DS . self::BASE_CONTROLLER . DS . self::VIEW_ROUTE, array(self::URL_VIEW_PARAMETER => $link));
+        return Mage::getUrl(self::BASE_ROUTE . DS . $link);
     }
 
     public function getUrl()

@@ -48,7 +48,7 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
 
                 $session->addSuccess($this->__('News was saved successfully'));
                 $session->setFormData(false);
-                $session->_redirect('*/*/');
+                $this->_redirect('*/*/');
             } catch (Exception $e) {
                 $session->addError($e->getMessage());
                 $session->setFormData($data);

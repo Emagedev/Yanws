@@ -27,6 +27,7 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
         $prev = $collectionPublished
             ->addFieldToFilter('is_published', array('eq' => 1))
             ->addFieldToFilter('timestamp_created', array('lt' => $entryTimestamp))
+            ->setOrder('timestamp_created', 'desc')
             ->getFirstItem();
 
         $collectionPublished = Mage::getModel('yanws/news')
@@ -35,6 +36,7 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
         $next = $collectionPublished
             ->addFieldToFilter('is_published', array('eq' => 1))
             ->addFieldToFilter('timestamp_created', array('gt' => $entryTimestamp))
+            ->setOrder('timestamp_created', 'asc')
             ->getFirstItem();
 
         if ($entry->isPublished()) {
