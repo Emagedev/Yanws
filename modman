@@ -2,8 +2,9 @@ app/code/community/Emagedev/Yanws app/code/community/Emagedev/Yanws
 app/design/adminhtml/default/default/layout/yanws.xml app/design/adminhtml/default/default/layout/yanws.xml
 app/design/frontend/base/default/layout/yanws.xml app/design/frontend/base/default/layout/yanws.xml
 app/design/frontend/base/default/template/yanws app/design/frontend/base/default/template/yanws
-app/locale/ru_RU app/locale/ru_RU
+app/locale/ru_RU/Emagedev_Yanws_Adminhtml.csv app/locale/ru_RU/Emagedev_Yanws_Adminhtml.csv
+app/locale/ru_RU/Emagedev_Yanws.csv app/locale/ru_RU/Emagedev_Yanws.csv
 app/locale/en_US/Emagedev_Yanws_Adminhtml.csv app/locale/en_US/Emagedev_Yanws_Adminhtml.csv
 app/locale/en_US/Emagedev_Yanws.csv app/locale/en_US/Emagedev_Yanws.csv
 app/etc/modules/Emagedev_Yanws.xml app/etc/modules/Emagedev_Yanws.xml
-skin/frontend/yanws/default/css/emagedev-news.css skin/frontend/yanws/default/css/emagedev-news.css
+skin/frontend/base/default/css/emagedev-news.css skin/frontend/base/default/css/emagedev-news.css
