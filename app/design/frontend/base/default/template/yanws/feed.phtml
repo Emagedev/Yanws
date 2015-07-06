@@ -1,7 +1,11 @@
 <?php
-    $title = $this->getTitle();
-    $feed = $this->getFeed();
-    $utils = $this->getUtils();
+/**
+ * @var $this Emagedev_Yanws_Block_News_Feed
+ */
+
+$title = $this->getTitle();
+$feed = $this->getFeed();
+$utils = $this->getUtils();
 ?>
 <h1><?php echo $title; ?></h1>
 <?php if(!empty($feed)): ?>
@@ -13,7 +17,7 @@
                         <em><?php echo $utils->prettyDate($entry->getDatetimeCreated()); ?></em>
                         <h2><a href="<?php echo $this->escapeHtml(
                                 $utils->makeViewUrl($entry->getUrl())
-                            ); ?>"><?= $entry->getTitle(); ?></a></h2>
+                            ); ?>"><?php echo $entry->getTitle(); ?></a></h2>
                     </header>
                     <section class="news-entry-content">
                         <?php echo $this->getShorten($entry); ?>

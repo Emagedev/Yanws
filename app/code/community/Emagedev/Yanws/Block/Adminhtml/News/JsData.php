@@ -12,6 +12,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_JsData extends Mage_Adminhtml_Block_Ab
 
         $response->setUrl(Mage::getBaseUrl());
         $response->setConvertTable(Mage::helper('yanws')->_getTransliterator()->getConvertTable());
-        echo $response->toJson();
+
+        return $response->toJson();
     }
 } 

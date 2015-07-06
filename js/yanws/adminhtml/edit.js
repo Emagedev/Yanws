@@ -1,7 +1,3 @@
-/**
- * Created by skm293504 on 05.06.15.
- */
-
 (function() {
     document.addEventListener("DOMContentLoaded", function(event) {
         var dataElement = document.getElementById("yanws-data");
