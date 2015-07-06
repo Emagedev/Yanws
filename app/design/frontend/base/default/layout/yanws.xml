@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/emagedev-news.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="right">
+            <block type="yanws/news_widget" name="yanws.last" before="cart_sidebar" template="yanws/widget.phtml" />
+        </reference>
+    </default>
+    <yanws_index_index>
+        <reference name="content">
+            <block type="yanws/news_feed" template="yanws/feed.phtml" />
+        </reference>
+    </yanws_index_index>
+    <yanws_index_view>
+        <reference name="content">
+            <block type="yanws/news_entry" template="yanws/view.phtml" />
+        </reference>
+    </yanws_index_view>
+</layout>

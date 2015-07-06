@@ -1,0 +1,38 @@
+<?php
+    $title = $this->getTitle();
+    $feed = $this->getFeed();
+    $utils = $this->getUtils();
+?>
+<h1><?php echo $title; ?></h1>
+<?php if(!empty($feed)): ?>
+    <section class="full-news">
+        <?php foreach($feed as $entry): ?>
+            <?php if($entry->isPublished()): ?>
+                <article class="news-entry">
+                    <header>
+                        <em><?php echo $utils->prettyDate($entry->getDatetimeCreated()); ?></em>
+                        <h2><a href="<?php echo $this->escapeHtml(
+                                $utils->makeViewUrl($entry->getUrl())
+                            ); ?>"><?= $entry->getTitle(); ?></a></h2>
+                    </header>
+                    <section class="news-entry-content">
+                        <?php echo $this->getShorten($entry); ?>
+                    </section>
+                    <footer>
+                        <a href="<?php echo $this->escapeHtml(
+                            $utils->makeViewUrl($entry->getUrl())
+                        ); ?>"><?php echo $this->__('Read more'); ?></a>
+                    </footer>
+                </article>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php echo $this->getPager(); ?>
+    </section>
+<?php else: ?>
+    <section class="full-news">
+        <div class="yanws feed-empty">
+            <!-- TODO: translate! -->
+            <p>Sorry, there's no news to show</p>
+        </div>
+    </section>
+<?php endif; ?>
