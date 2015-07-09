@@ -1,15 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: dantaeusb
- * Date: 08.05.15
- * Time: 0:47
+ * @var $this Mage_Core_Model_Resource_Setup
  */
-
 $installer = $this;
 $tableNews = $installer->getTable('yanws/news');
-
-//die($tableNews);
 
 $installer->startSetup();
 

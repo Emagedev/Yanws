@@ -17,26 +17,27 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
     {
         parent::_prepareLayout();
 
+        /** @var Emagedev_Yanws_Model_News $entry */
         $entry = Mage::registry('yanws_entry');
-
-        $collectionPublished = Mage::getModel('yanws/news')
-            ->getCollection();
 
         $entryTimestamp = $entry->getTimestampCreated();
 
-        $prev = $collectionPublished
+        $prev = Mage::getModel('yanws/news')
+            ->getCollection()
             ->addFieldToFilter('is_published', array('eq' => 1))
             ->addFieldToFilter('timestamp_created', array('lt' => $entryTimestamp))
             ->setOrder('timestamp_created', 'desc')
+            ->setPageSize(1)
+            ->setCurPage(1)
             ->getFirstItem();
 
-        $collectionPublished = Mage::getModel('yanws/news')
-            ->getCollection();
-
-        $next = $collectionPublished
+        $next = Mage::getModel('yanws/news')
+            ->getCollection()
             ->addFieldToFilter('is_published', array('eq' => 1))
             ->addFieldToFilter('timestamp_created', array('gt' => $entryTimestamp))
             ->setOrder('timestamp_created', 'asc')
+            ->setPageSize(1)
+            ->setCurPage(1)
             ->getFirstItem();
 
         if ($entry->isPublished()) {

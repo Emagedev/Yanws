@@ -1,17 +1,21 @@
 <?php
-    $entry = $this->getEntry();
-    $links = $this->getLinks();
-    $utils = $this->getUtils();
+/**
+ * @var $this Emagedev_Yanws_Block_News_Entry
+ */
+
+$entry = $this->getEntry();
+$links = $this->getLinks();
+$utils = $this->getUtils();
 ?>
 
 <section class="yanws-entry-view">
     <article class="news-entry">
         <header>
-            <em><?= $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
-            <h2><?= $this->escapeHtml($entry->getTitle()); ?></h2>
+            <em><?php echo $utils->prettyDate(new DateTime($entry->getTimestampCreated())); ?></em>
+            <h2><?php echo $this->escapeHtml($entry->getTitle()); ?></h2>
         </header>
         <section class="news-entry-content">
-            <?= $entry->getArticle(); ?>
+            <?php echo $entry->getArticle(); ?>
         </section>
         <footer>
             <div class="news-footer-links">
