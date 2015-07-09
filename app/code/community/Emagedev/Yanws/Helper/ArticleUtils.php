@@ -1,11 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: skm293504
- * Date: 08.05.15
- * Time: 15:16
- */
+
 class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 {
     const BASE_ROUTE = 'news';
@@ -15,11 +10,6 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
     public function makeViewUrl($link)
     {
-        /*
-         * WTF it's not url encoder look at code!
-         * $link = $this->urlEncode($link);
-         */
-
         $link = urlencode($link);
         return Mage::getUrl(self::BASE_ROUTE . DS . $link);
     }
