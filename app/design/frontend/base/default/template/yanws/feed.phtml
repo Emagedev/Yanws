@@ -8,7 +8,7 @@ $feed = $this->getFeed();
 $utils = $this->getUtils();
 ?>
 <h1><?php echo $title; ?></h1>
-<?php if(!empty($feed)): ?>
+<?php if($feed->getSize() !== 0): ?>
     <section class="full-news">
         <?php foreach($feed as $entry): ?>
             <?php if($entry->isPublished()): ?>
@@ -35,8 +35,7 @@ $utils = $this->getUtils();
 <?php else: ?>
     <section class="full-news">
         <div class="yanws feed-empty">
-            <!-- TODO: translate! -->
-            <p>Sorry, there's no news to show</p>
+            <p><?php echo $this->__('Sorry, there\'s no news to show.'); ?></p>
         </div>
     </section>
 <?php endif; ?>

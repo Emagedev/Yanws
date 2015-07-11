@@ -12,6 +12,7 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
 
     public function indexAction()
     {
+        $this->_title($this->__("News management"));
         $this->loadLayout();
         $this->_setActiveMenu('yanws');
         $this->renderLayout();
@@ -26,9 +27,9 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
     {
         $id = (int)$this->getRequest()->getParam('id');
 
-        // It's okay, anyway
         Mage::register('current_news', Mage::getModel('yanws/news')->load($id));
 
+        $this->_title($this->__("New entry"));
         $this->loadLayout()->_setActiveMenu('yanws');
         $this->renderLayout();
     }
@@ -40,6 +41,10 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
             try {
                 $data['is_shorten'] = empty($data['is_shorten']) ? 0 : $data['is_shorten'];
                 $data['is_published'] = empty($data['is_published']) ? 1 : $data['is_published'];
+
+                if($data['is_shorten'] == 1 && empty($data['shorten_article'])) {
+                    Mage::throwException('Please write a shorten article or disable it');
+                }
 
                 $model = Mage::getModel('yanws/news');
                 $model->setData($data)->setId($this->getRequest()->getParam('id'));

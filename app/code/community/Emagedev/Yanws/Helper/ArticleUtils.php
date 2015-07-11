@@ -16,7 +16,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
     public function getUrl()
     {
-        return Mage::getUrl(self::BASE_ROUTE . DS . self::BASE_CONTROLLER);
+        return Mage::getUrl(self::BASE_ROUTE . DS);
     }
 
     public function getShorten($entry, $words, $saveTags = true, $forceTruncate = false, $letters = 500)
