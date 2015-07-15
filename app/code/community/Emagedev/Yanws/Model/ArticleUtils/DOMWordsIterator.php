@@ -12,7 +12,7 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMWordsIterator
      */
     public function currentPosition()
     {
-        return array($this->current, $this->offset);
+        return array($this->current, $this->offset, $this->parts);
     }
 
     public function next()
