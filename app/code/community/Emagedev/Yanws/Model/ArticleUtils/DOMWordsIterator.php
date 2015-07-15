@@ -21,13 +21,15 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMWordsIterator
 
         if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
             if ($this->offset == -1) {
-                // fastest way to get individual Unicode chars and does not require mb_* functions
-                preg_match_all('/./us', $this->current->textContent, $m);
-                $this->parts = $m[0];
+                $this->parts = preg_split("/[\n\r\t ]+/", $this->current->textContent, -1,
+                    PREG_SPLIT_NO_EMPTY | PREG_SPLIT_OFFSET_CAPTURE);
             }
             $this->offset++;
-            $this->key++;
-            if ($this->offset < count($this->parts)) return;
+
+            if ($this->offset < count($this->words)) {
+                $this->key++;
+                return;
+            }
             $this->offset = -1;
         }
 
