@@ -1,10 +1,12 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: skm293504
- * Date: 09.05.15
- * Time: 3:42
+ * @method $this setEntry
+ * @method Emagedev_Yanws_Model_News getEntry
+ * @method $this setLinks
+ * @method array getLinks
+ * @method $this setUtils
+ * @method Emagedev_Yanws_Helper_ArticleUtils getUtils
  */
 class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
 {
@@ -42,7 +44,21 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
 
         if ($entry->isPublished()) {
             $this->setEntry($entry);
-            $this->setLinks(array('next' => $next, 'prev' => $prev));
+
+            $links = array();
+            if($prev->getId()) {
+                $links['prev'] = $prev;
+            } else {
+                $links['prev'] = false;
+            }
+
+            if($next->getId()) {
+                $links['next'] = $next;
+            } else {
+                $links['next'] = false;
+            }
+
+            $this->setLinks($links);
         }
 
         return $this;

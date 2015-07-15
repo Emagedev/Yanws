@@ -1,10 +1,16 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: skm293504
- * Date: 08.05.15
- * Time: 2:18
+ * @method $this setIsPublished
+ * @method string getIsPublished
+ * @method $this setIsShorten
+ * @method string getIsShorten
+ * @method $this setTimestampCreated
+ * @method int getTimestampCreated
+ * @method $this setUrl
+ * @method string getUrl
+ * @method $this setTitle
+ * @method string getTitle
  */
 class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract
 {
@@ -48,17 +54,27 @@ class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract
         }
     }
 
+    /**
+     * Transliterate and format entry url before save
+     *
+     * @param $helper Emagedev_Yanws_Helper_Data
+     */
     private function makeUrl($helper)
     {
         // TODO: refactor
 
+        /** @var $url_transliterator Mage_Catalog_Helper_Product_Url */
         $url_transliterator = Mage::helper('yanws')->_getTransliterator();
 
         if ($this->getUrl() === '') {
-            $plainUrl = $url_transliterator->format($this->getTitle());
+            $plainUrl = $this->getTitle();
         } else {
             $plainUrl = $this->getUrl();
         }
+
+        $plainUrl = preg_replace('#[^0-9a-z]+#i', '-', $url_transliterator->format($plainUrl));
+        $plainUrl = strtolower($plainUrl);
+        $plainUrl = trim($plainUrl, '-');
 
         // To handle rewrites
         if($plainUrl == 'index') {

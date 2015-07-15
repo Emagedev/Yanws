@@ -8,6 +8,8 @@
             var shortenCheckbox = document.getElementById("is_shorten");
 
             var check = function() {
+                //shortenCheckbox.value = shortenCheckbox.checked ? 1 : 0;
+                //console.log(shortenCheckbox.value);
                 var shortenActive = !!shortenCheckbox.checked;
                 if(shortenActive) {
                     shortenEditorRow.style.display = "table-row";
@@ -16,9 +18,9 @@
                 }
             };
 
-            shortenCheckbox.onclick = function() {
+            shortenCheckbox.addEventListener('click', function() {
                 check();
-            };
+            });
 
             check();
         })();
@@ -27,22 +29,35 @@
             var urlInput = document.getElementsByName("url")[0];
             var titleInput = document.getElementsByName("title")[0];
             var exampleOutput = document.getElementById("url-view-helper-url");
-            var baseURL = data.url + "news/index/view/page/";
+            var baseURL = data.url + data["base_route"] + "/";
 
-            titleInput.onkeyup = urlInput.onkeyup = function() {
+            urlInput.addEventListener("keyup", function() {
                 showExample();
+            });
+
+            titleInput.addEventListener("keyup", function() {
+                showExample();
+            });
+
+            var customTrim = function(str) {
+                return (str.replace(/-*(.*)/gi, '$1')).replace(/\-*$/gi, '');
+            };
+
+            var prepareUrl = function(url) {
+                var readyUrl =  url.replace(/[^0-9a-z]+/gi, '-').toLowerCase().trim('-');
+                return customTrim(readyUrl);
             };
 
             var showExample = function() {
                 if(urlInput.value !== "") {
-                    exampleOutput.innerText = baseURL + encodeURI(urlInput.value);
+                    exampleOutput.innerText = baseURL + encodeURI(prepareUrl(urlInput.value));
                 } else {
-                    exampleOutput.innerText = baseURL + encodeURI(strtr(titleInput.value, convertTable));
+                    exampleOutput.innerText = baseURL +
+                    encodeURI(prepareUrl(strtr(titleInput.value.toLowerCase(), convertTable)));
                 }
             };
             
             var convertTable = data["convert_table"];
-            console.log(convertTable);
 
             var strtr = function (str, replacePairs) {
                 var key, re;

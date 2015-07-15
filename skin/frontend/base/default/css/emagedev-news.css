@@ -123,3 +123,12 @@ article.news-entry section.news-entry-content ul {
   font-size: 3rem;
   text-align: center;
 }
+.yanws.widget-empty {
+  display: block;
+  padding: 1rem 0;
+  text-align: center;
+}
+.yanws.widget-empty p {
+  font-size: 1.5rem;
+  text-align: center;
+}

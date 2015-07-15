@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: skm293504
- * Date: 11.05.15
- * Time: 0:49
+ * @method $this setUtils
+ * @method Emagedev_Yanws_Helper_ArticleUtils getUtils
  */
 class Emagedev_Yanws_Block_News_Widget extends Mage_Core_Block_Template
 {

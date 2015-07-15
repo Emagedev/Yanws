@@ -9,25 +9,31 @@ $utils = $this->getUtils();
 ?>
 <div class="block-title"><strong><span><?php echo $title; ?></span></strong></div>
 <section class="yanws side-news">
-    <?php foreach($feed as $entry): ?>
-        <article class="news-entry">
-            <header>
-                <em><?php echo $this->escapeHtml($utils->prettyDate($entry->getDatetimeCreated())); ?></em>
-                <h4>
+    <?php if($feed->getSize() !== 0): ?>
+        <?php foreach($feed as $entry): ?>
+            <article class="news-entry">
+                <header>
+                    <em><?php echo $this->escapeHtml($utils->prettyDate($entry->getDatetimeCreated())); ?></em>
+                    <h4>
+                        <a href="<?php echo $this->escapeHtml($utils->makeViewUrl($entry->getUrl())); ?>">
+                            <?php echo $entry->getTitle(); ?></a>
+                    </h4>
+                </header>
+                <section class="yanws news-entry-content">
+                    <?php echo $this->getShorten($entry); ?>
+                </section>
+                <footer>
                     <a href="<?php echo $this->escapeHtml($utils->makeViewUrl($entry->getUrl())); ?>">
-                        <?php echo $entry->getTitle(); ?></a>
-                </h4>
-            </header>
-            <section class="yanws news-entry-content">
-                <?php echo $this->getShorten($entry); ?>
-            </section>
-            <footer>
-                <a href="<?php echo $this->escapeHtml($utils->makeViewUrl($entry->getUrl())); ?>">
-                    <?php echo $this->__('Read more'); ?></a>
-            </footer>
-        </article>
-    <?php endforeach; ?>
-    <footer class="yanws news-link">
-        <a href="<?php echo $this->escapeHtml($utils->getUrl()); ?>" ><?php echo $this->__('More news'); ?></a>
-    </footer>
+                        <?php echo $this->__('Read more'); ?></a>
+                </footer>
+            </article>
+        <?php endforeach; ?>
+        <footer class="yanws news-link">
+            <a href="<?php echo $this->escapeHtml($utils->getUrl()); ?>" ><?php echo $this->__('More news'); ?></a>
+        </footer>
+    <?php else: ?>
+        <div class="yanws widget-empty">
+            <p><?php echo $this->__('Sorry, there\'s no news to show.'); ?></p>
+        </div>
+    <?php endif; ?>
 </section>

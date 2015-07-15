@@ -19,12 +19,12 @@ $utils = $this->getUtils();
         </section>
         <footer>
             <div class="news-footer-links">
-                <?php if(!empty($links['prev'])): ?>
+                <?php if($links['prev']): ?>
                     <a class="prev" href="<?php echo $this->escapeHtml($utils->makeViewUrl($links['prev']->getUrl())); ?>">
                         <?php echo $links['prev']->getTitle() ?></a>
                 <?php endif; ?>
                 <a class="prev" href="<?php echo $this->escapeHtml($utils->getUrl()); ?>" ><?php echo $this->__('More news'); ?></a>
-                <?php if(!empty($links['next'])): ?>
+                <?php if($links['next']): ?>
                     <a class="next" href="<?php echo $this->escapeHtml($utils->makeViewUrl($links['next']->getUrl())); ?>">
                         <?php echo $links['next']->getTitle() ?></a>
                 <?php endif; ?>

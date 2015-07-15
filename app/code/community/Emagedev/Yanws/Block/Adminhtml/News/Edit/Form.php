@@ -12,6 +12,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
     protected function _prepareForm()
     {
         $helper = Mage::helper('yanws');
+        /** @var Emagedev_Yanws_Model_News $model */
         $model = Mage::registry('current_news');
 
         $form = new Varien_Data_Form(array(
@@ -81,7 +82,7 @@ class Emagedev_Yanws_Block_Adminhtml_News_Edit_Form extends Mage_Adminhtml_Block
             'required' => false,
             'name' => 'is_published',
             'value' => empty($entry) ? '1' : $model->isPublished(),
-            'onclick' => 'this.value = this.checked ? 1 : 0;'
+            'onclick' => 'this.value = this.checked ? 1 : 0; '
         ));
 
         $form->getElement('is_published')->setIsChecked(empty($entry) ? true : $model->isPublished());
