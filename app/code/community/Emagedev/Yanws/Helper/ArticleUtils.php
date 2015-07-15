@@ -19,8 +19,9 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
         return Mage::getUrl(self::BASE_ROUTE . DS);
     }
 
-    public function getShorten($entry, $words, $saveTags = true, $forceTruncate = false, $letters = 500)
+    public function getShorten($entry, $words, $saveTags = true, $forceTruncate = false)
     {
+        $letters = 500;
         $hasShorten = $entry->hasShortenForm();
 
         if ($hasShorten) {
@@ -172,11 +173,11 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         $body = $dom->getElementsByTagName('body')->item(0);
 
-        $it = Mage::getModel('yanws/articleUtils_DOMLettersIterator', $body);
+        $iterator = Mage::getModel('yanws/articleUtils_DOMLettersIterator', $body);
 
-        foreach ($it as $letter) {
-            if ($it->key() >= $limit) {
-                $currentText = $it->currentTextPosition();
+        foreach ($iterator as $letter) {
+            if ($iterator->key() >= $limit) {
+                $currentText = $iterator->currentTextPosition();
                 $currentText[0]->nodeValue = substr($currentText[0]->nodeValue, 0, $currentText[1] + 1);
                 self::removeProceedingNodes($currentText[0], $body);
                 self::insertEllipsis($currentText[0], $ellipsis);
@@ -200,11 +201,11 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         $body = $dom->getElementsByTagName('body')->item(0);
 
-        $it = Mage::getModel('yanws/articleUtils_DOMWordsIterator', $body);
+        $iterator = Mage::getModel('yanws/articleUtils_DOMWordsIterator', $body);
 
-        foreach ($it as $word) {
-            if ($it->key() >= $limit) {
-                $currentWordPosition = $it->currentWordPosition();
+        foreach ($iterator as $word) {
+            if ($iterator->key() >= $limit) {
+                $currentWordPosition = $iterator->currentWordPosition();
                 $curNode = $currentWordPosition[0];
                 $offset = $currentWordPosition[1];
                 $words = $currentWordPosition[2];

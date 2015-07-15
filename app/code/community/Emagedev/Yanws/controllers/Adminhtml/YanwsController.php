@@ -25,9 +25,9 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
 
     public function editAction()
     {
-        $id = (int)$this->getRequest()->getParam('id');
+        $entryId = (int)$this->getRequest()->getParam('id');
 
-        Mage::register('current_news', Mage::getModel('yanws/news')->load($id));
+        Mage::register('current_news', Mage::getModel('yanws/news')->load($entryId));
 
         $this->_title($this->__("New entry"));
         $this->loadLayout()->_setActiveMenu('yanws');

@@ -1,5 +1,5 @@
 (function() {
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function() {
         var dataElement = document.getElementById("yanws-data");
         var data = JSON.parse(dataElement.getInnerText());
 
@@ -29,7 +29,7 @@
             var urlInput = document.getElementsByName("url")[0];
             var titleInput = document.getElementsByName("title")[0];
             var exampleOutput = document.getElementById("url-view-helper-url");
-            var baseURL = data.url + data["base_route"] + "/";
+            var baseURL = data.url + data.base_route + "/";
 
             urlInput.addEventListener("keyup", function() {
                 showExample();
@@ -57,7 +57,7 @@
                 }
             };
             
-            var convertTable = data["convert_table"];
+            var convertTable = data.convert_table;
 
             var strtr = function (str, replacePairs) {
                 var key, re;
