@@ -177,7 +177,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         foreach ($iterator as $letter) {
             if ($iterator->key() >= $limit) {
-                $currentText = $iterator->currentTextPosition();
+                $currentText = $iterator->currentPosition();
                 $currentText[0]->nodeValue = substr($currentText[0]->nodeValue, 0, $currentText[1] + 1);
                 self::removeProceedingNodes($currentText[0], $body);
                 self::insertEllipsis($currentText[0], $ellipsis);
@@ -205,7 +205,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
 
         foreach ($iterator as $word) {
             if ($iterator->key() >= $limit) {
-                $currentWordPosition = $iterator->currentWordPosition();
+                $currentWordPosition = $iterator->currentPosition();
                 $curNode = $currentWordPosition[0];
                 $offset = $currentWordPosition[1];
                 $words = $currentWordPosition[2];
