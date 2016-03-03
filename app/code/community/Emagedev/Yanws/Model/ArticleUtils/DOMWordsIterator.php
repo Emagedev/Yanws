@@ -26,7 +26,7 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMWordsIterator
             }
             $this->offset++;
 
-            if ($this->offset < count($this->words)) {
+            if ($this->offset < count($this->parts)) {
                 $this->key++;
                 return;
             }
