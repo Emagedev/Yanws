@@ -58,7 +58,8 @@ class Emagedev_Yanws_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
-    public function _getTransliterator() {
+    public function _getTransliterator()
+    {
         return Mage::helper('catalog/product_url');
     }
 }

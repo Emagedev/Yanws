@@ -49,7 +49,9 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMLettersIterator implements Iterator
 
     public function next()
     {
-        if (!$this->current) return;
+        if (!$this->current) {
+            return;
+        }
 
         if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
             if ($this->offset == -1) {
@@ -59,7 +61,9 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMLettersIterator implements Iterator
             }
             $this->offset++;
             $this->key++;
-            if ($this->offset < count($this->parts)) return;
+            if ($this->offset < count($this->parts)) {
+                return;
+            }
             $this->offset = -1;
         }
 
@@ -79,7 +83,7 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMLettersIterator implements Iterator
         while (!$this->current->nextSibling && $this->current->parentNode) {
             $this->current = $this->current->parentNode;
             if ($this->current === $this->start) {
-                $this->current = NULL;
+                $this->current = null;
                 return;
             }
         }
