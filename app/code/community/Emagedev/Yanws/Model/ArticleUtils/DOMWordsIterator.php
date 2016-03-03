@@ -17,7 +17,9 @@ class Emagedev_Yanws_Model_ArticleUtils_DOMWordsIterator
 
     public function next()
     {
-        if (!$this->current) return;
+        if (!$this->current) {
+            return;
+        }
 
         if ($this->current->nodeType == XML_TEXT_NODE || $this->current->nodeType == XML_CDATA_SECTION_NODE) {
             if ($this->offset == -1) {

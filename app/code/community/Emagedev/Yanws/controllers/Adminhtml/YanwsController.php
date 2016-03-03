@@ -42,7 +42,7 @@ class Emagedev_Yanws_Adminhtml_YanwsController extends Mage_Adminhtml_Controller
                 $data['is_shorten'] = empty($data['is_shorten']) ? 0 : $data['is_shorten'];
                 $data['is_published'] = empty($data['is_published']) ? 1 : $data['is_published'];
 
-                if($data['is_shorten'] == 1 && empty($data['shorten_article'])) {
+                if ($data['is_shorten'] == 1 && empty($data['shorten_article'])) {
                     Mage::throwException('Please write a shorten article or disable it');
                 }
 

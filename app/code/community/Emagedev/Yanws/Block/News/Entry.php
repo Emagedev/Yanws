@@ -46,13 +46,13 @@ class Emagedev_Yanws_Block_News_Entry extends Mage_Core_Block_Template
             $this->setEntry($entry);
 
             $links = array();
-            if($prev->getId()) {
+            if ($prev->getId()) {
                 $links['prev'] = $prev;
             } else {
                 $links['prev'] = false;
             }
 
-            if($next->getId()) {
+            if ($next->getId()) {
                 $links['next'] = $next;
             } else {
                 $links['next'] = false;

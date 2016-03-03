@@ -77,7 +77,7 @@ class Emagedev_Yanws_Model_News extends Mage_Core_Model_Abstract
         $plainUrl = trim($plainUrl, '-');
 
         // To handle rewrites
-        if($plainUrl == 'index') {
+        if ($plainUrl == 'index') {
             $plainUrl = 'indexation';
         }
 

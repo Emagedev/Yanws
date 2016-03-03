@@ -113,7 +113,7 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
         $helper = Mage::helper('yanws');
         // If not provided, set $reference to the current DateTime
         if (!$reference) {
-            $reference = new \DateTime(NULL, new \DateTimeZone($dateTime->getTimezone()->getName()));
+            $reference = new \DateTime(null, new \DateTimeZone($dateTime->getTimezone()->getName()));
         }
         // Get the difference between the current date and the supplied $dateTime
         $difference = $reference->format('U') - $dateTime->format('U');
@@ -165,8 +165,9 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
     public static function truncateChars($html, $limit, $ellipsis = '...')
     {
 
-        if ($limit <= 0 || $limit >= strlen(strip_tags($html)))
-            return $html;
+        if ($limit <= 0 || $limit >= strlen(strip_tags($html))) {
+                    return $html;
+        }
 
         $dom = new DOMDocument();
         $dom->loadHTML($html);
@@ -191,8 +192,9 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
     public static function truncateWords($html, $limit, $ellipsis = '...')
     {
 
-        if ($limit <= 0 || $limit >= self::countWords(strip_tags($html)))
-            return $html;
+        if ($limit <= 0 || $limit >= self::countWords(strip_tags($html))) {
+                    return $html;
+        }
 
         $dom = new DOMDocument();
 
@@ -225,14 +227,14 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
     {
         $nextNode = $domNode->nextSibling;
 
-        if ($nextNode !== NULL) {
+        if ($nextNode !== null) {
             self::removeProceedingNodes($nextNode, $topNode);
             $domNode->parentNode->removeChild($nextNode);
         } else {
             //scan upwards till we find a sibling
             $curNode = $domNode->parentNode;
             while ($curNode !== $topNode) {
-                if ($curNode->nextSibling !== NULL) {
+                if ($curNode->nextSibling !== null) {
                     $curNode = $curNode->nextSibling;
                     self::removeProceedingNodes($curNode, $topNode);
                     $curNode->parentNode->removeChild($curNode);
@@ -247,14 +249,15 @@ class Emagedev_Yanws_Helper_ArticleUtils extends Mage_Core_Helper_Abstract
     {
         $avoid = array('a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5'); //html tags to avoid appending the ellipsis to
 
-        if (in_array($domNode->parentNode->nodeName, $avoid) && $domNode->parentNode->parentNode !== NULL) {
+        if (in_array($domNode->parentNode->nodeName, $avoid) && $domNode->parentNode->parentNode !== null) {
             // Append as text node to parent instead
             $textNode = new DOMText($ellipsis);
 
-            if ($domNode->parentNode->parentNode->nextSibling)
-                $domNode->parentNode->parentNode->insertBefore($textNode, $domNode->parentNode->parentNode->nextSibling);
-            else
-                $domNode->parentNode->parentNode->appendChild($textNode);
+            if ($domNode->parentNode->parentNode->nextSibling) {
+                            $domNode->parentNode->parentNode->insertBefore($textNode, $domNode->parentNode->parentNode->nextSibling);
+            } else {
+                            $domNode->parentNode->parentNode->appendChild($textNode);
+            }
         } else {
             // Append to current node
             $domNode->nodeValue = rtrim($domNode->nodeValue) . $ellipsis;

@@ -6,8 +6,10 @@
  * Time: 22:15
  */
 
-class Emagedev_Yanws_Block_Adminhtml_News_JsData extends Mage_Adminhtml_Block_Abstract {
-    public function getJson() {
+class Emagedev_Yanws_Block_Adminhtml_News_JsData extends Mage_Adminhtml_Block_Abstract
+{
+    public function getJson()
+    {
         $response = new Varien_Object();
         $helper = Mage::helper('yanws/articleUtils');
 
